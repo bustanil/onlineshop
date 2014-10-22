@@ -16,14 +16,17 @@
 					<li class="list-group-item">
 					<div class="row">
 					<div class="col-md-3">
-					<h:outputText value="#{p.name}" /><br/>
+					<h:link value="#{p.name}" outcome="/product/detail.xhtml">
+					<f:param name="id" value="#{p.id}" />
+					</h:link>
+					<br/>
 					Price: <h:outputText value="#{p.price} " />
 					</div>
 					<div class="col-md-2">
 					<h:form>
-					<h:commandLink value="Add To Chart" action="#{pc.delete}">
+					<!-- <h:commandLink value="Add To Chart" action="#{pc.delete}">
 					<f:param name="id" value="#{p.id}"/>
-				    </h:commandLink>
+				    </h:commandLink> -->
 				    </h:form>
 				   </div>
 		
