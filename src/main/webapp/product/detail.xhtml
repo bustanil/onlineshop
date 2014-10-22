@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/bootstrap.xhtml">
+		<ui:define name="panelHeading">
+			<h3>
+				<h:outputText value="#{productDetailController.product.name}" />
+			</h3>
+		</ui:define>
+		<ui:define name="content">
+		<h:form>
+		<h4><h:outputText value="Price" /></h4>
+		<h:outputText value="#{productDetailController.product.price}" />
+		<br />
+		<h4><h:outputText value="Stock" /></h4>
+		<h:outputText value="#{productDetailController.product.stock}" />
+		<br />
+		<h4><h:outputText value="Description" /></h4>
+		<h:outputText value="#{productDetailController.product.description}" />
+		<br />
+		
+		<h:commandButton action="Submit" value="Add To Cart" />
+		</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
