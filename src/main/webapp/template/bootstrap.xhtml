@@ -14,7 +14,15 @@
 		<ui:include src="/template/header.xhtml" />
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-3"> 
+			
+			<ui:repeat var="c" value="#{shopController.allCategories}">
+			<h:outputText value="#{c.name}" />
+			</ui:repeat>
+			
+			</div>
+		
+			<div class="col-md-9">
 
 				<div class="panel panel-default">
 					<div class="panel-heading"><ui:insert name="panelHeading"></ui:insert></div>
@@ -22,7 +30,8 @@
 						<ui:insert name="content">
 
 							<h3>Hello world</h3>
-
+								<h1>zxcv</h1>
+								<h2>sdfsdf</h2>
 						</ui:insert>
 					</div>
 				</div>
