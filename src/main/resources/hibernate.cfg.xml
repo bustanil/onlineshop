@@ -9,9 +9,16 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+ <!--        <property name="hibernate.hbm2ddl.auto">update</property> -->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
-        
+         <mapping class="id.co.skyforce.shop.model.Category" />
+         <mapping class="id.co.skyforce.shop.model.Product" />
+        <mapping class="id.co.skyforce.shop.model.Customer" />
+        <mapping class="id.co.skyforce.shop.model.Address" />
+        <mapping class="id.co.skyforce.shop.model.Order" />
+        <mapping class="id.co.skyforce.shop.model.OrderDetail" />
+        <mapping class="id.co.skyforce.shop.model.Supplier" />
+        <mapping class="id.co.skyforce.shop.model.PaymentMethod" />
     </session-factory>
 </hibernate-configuration>
