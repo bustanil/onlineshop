@@ -23,7 +23,7 @@
 					<ul class="list-group">
 						<ui:repeat var="c" value="#{shopController.allCategories}">
 							<li class="list-group-item">
-							<h:link value="#{c.id}" outcome="/product/list.xhtml">
+							<h:link value="#{c.name}" outcome="/product/list.xhtml">
 									<f:param name="id" value="#{c.id}" />
 								</h:link></li>
 						</ui:repeat>
