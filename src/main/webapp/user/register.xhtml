@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<body>
+	<h3>
+		<h:form>
+
+			<h:inputHidden value="#{customerController.customerId}"
+				converter="javax.faces.Long" />
+			<h:inputHidden value="#{customerController.addressId}"
+				converter="javax.faces.Long" />
+			<table>
+				<tr>
+					<td>Salutation :</td>
+					<td><h:selectOneMenu value="#{customerController.salutation}">
+							<f:selectItem itemValue="Mr" itemLabel="Mr" />
+							<f:selectItem itemValue="Mrs" itemLabel="Mrs" />
+							<f:selectItem itemValue="Ms" itemLabel="Ms" />
+						</h:selectOneMenu></td>
+				</tr>
+				<tr>
+
+					<td>Nama Depan :</td>
+					<td><h:inputText value="#{customerController.firstName}"
+							required="true" label="Nama Depan" /></td>
+				</tr>
+				<tr>
+					<td>Nama Belakang :</td>
+					<td><h:inputText value="#{customerController.lastName}"
+							required="true" label="Nama Belakang" /></td>
+				</tr>
+				<tr>
+					<td>Jenis Kelamin :</td>
+					<td><h:selectOneRadio value="#{customerController.gender}">
+							<f:selectItem itemValue="P" itemLabel="Pria" />
+							<f:selectItem itemValue="W" itemLabel="Wanita" />
+						</h:selectOneRadio></td>
+				</tr>
+				<tr>
+					<td>Email :</td>
+					<td><h:inputText value="#{customerController.email}"
+							required="true" label="Email">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</h:inputText></td>
+				</tr>
+				<tr>
+					<td>Telp Rumah :</td>
+					<td><h:inputText value="#{customerController.homePhone}"
+							required="true" label="Telp Rumah" /></td>
+				</tr>
+				<tr>
+					<td>Telp Genggam :</td>
+					<td><h:inputText value="#{customerController.mobileNo}"
+							required="true" label="Telp Genggam" /></td>
+				</tr>
+				<tr>
+					<td>Kata sandi :</td>
+					<td><h:inputSecret value="#{customerController.password}"
+							required="true" redisplay="true" label="kata sandi">
+							<f:validateLength maximum="50" minimum="5" />
+						</h:inputSecret></td>
+				</tr>
+				<tr>
+					<td>Tanggal lahir (dd-MM-yyyy) :</td>
+					<td><h:inputText value="#{customerController.birthDate}">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:inputText></td>
+				</tr>
+				<tr>
+					<td>Alamat :</td>
+					<td><h:inputText value="#{customerController.street}"
+							required="true" label="jalan" /></td>
+				</tr>
+				<tr>
+					<td>Kota :</td>
+					<td><h:inputText value="#{customerController.city}"
+							required="true" label="kota" /></td>
+				</tr>
+				<tr>
+					<td>Kode pos :</td>
+					<td><h:inputText value="#{customerController.postalCode}"
+							required="true" label="kode pos" /></td>
+				</tr>
+				<tr>
+					<td><h:commandButton action="#{customerService.Register}"
+							value="Kirim" /></td>
+				</tr>
+			</table>
+
+			<h:message style="color:green;margin:8px;" />
+		</h:form>
+	</h3>
+</body>
+</html>

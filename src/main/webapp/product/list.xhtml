@@ -7,7 +7,50 @@
 <h:head></h:head> 
 <body> 
 <ui:composition template="/template/bootstrap.xhtml">
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+	<h:form>
+		<h:dataTable var="p" value="#{productListController.prd}">
+			<h:column>
+				<f:facet name="header">Category</f:facet>
+				<h:outputText value="#{p.category.id} #{p.category.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Product ID</f:facet>
+				<h:outputText value="#{p.productId}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+				<h:outputText value="#{p.description}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputText value="#{p.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Price</f:facet>
+				<h:outputText value="#{p.price} " />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Stock</f:facet>
+				<h:outputText value="#{p.stock} " />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="Add To Chart" action="#{pc.delete}">
+					<f:param name="id" value="#{p.productId}">
+					</f:param>
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+=======
+=======
 <ui:define name="panelHeading"><h3>Product List</h3></ui:define>
+>>>>>>> branch 'master' of https://github.com/bustanil/onlineshop.git
 <ui:define name="content">
 
 			<ul class="list-group">
@@ -38,6 +81,7 @@
 		
 	
 </ui:define>
+>>>>>>> branch 'master' of https://github.com/bustanil/onlineshop.git
 </ui:composition>
 </body> 
 </html>
