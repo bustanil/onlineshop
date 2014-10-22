@@ -24,11 +24,7 @@ public class ShopController {
 
 	public void setAllCategories(List<Category> allCategories) {
 		this.allCategories = allCategories;
+		
 	}
-<<<<<<< HEAD
- 
- 
 
-=======
->>>>>>> branch 'master' of https://github.com/bustanil/onlineshop.git
 }
