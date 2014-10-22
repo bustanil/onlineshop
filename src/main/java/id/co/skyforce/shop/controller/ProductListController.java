@@ -15,6 +15,9 @@ import id.co.skyforce.shop.util.HibernateUtil;
 import id.co.skyforce.shop.model.*;
 
 
+
+
+
 @ManagedBean
 public class ProductListController {
 

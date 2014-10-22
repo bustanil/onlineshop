@@ -6,15 +6,13 @@
 
 
 <h:head></h:head>
-<body>
-	<ui:composition template="/template/bootstrap.xhtml">
 
-		<ui:define name="panelHeading">
-			<h3>Product List</h3>
-		</ui:define>
+<body> 
+<ui:composition template="/template/bootstrap.xhtml">
 
-		<ui:define name="content">
 
+<ui:define name="panelHeading"><h3>Product List</h3></ui:define>
+<ui:define name="content">
 
 			<ul class="list-group">
 				<ui:repeat var="p" value="#{productListController.prd}">
@@ -43,4 +41,9 @@
 		</ui:define>
 	</ui:composition>
 </body>
+
+	
+			
+
+
 </html>
