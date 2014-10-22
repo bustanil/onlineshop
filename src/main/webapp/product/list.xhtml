@@ -7,8 +7,19 @@
 <h:head></h:head> 
 <body> 
 <ui:composition template="/template/bootstrap.xhtml">
+<ui:define name="panelHeading"><h3>Product List</h3></ui:define>
 <ui:define name="content">
-	<h:form>
+
+			<ul class="list-group">
+				<ui:repeat var="p" value="#{productListController.prd}">
+
+					<li class="list-group-item">
+					<h:outputText value="#{p.name}" />
+					</li>
+					
+				</ui:repeat>
+			</ul>
+			<h:form>
 		<h:dataTable var="p" value="#{productListController.prd}">
 			<h:column>
 				<f:facet name="header">Category</f:facet>
@@ -44,6 +55,7 @@
 			</h:column>
 		</h:dataTable>
 	</h:form>
+	
 </ui:define>
 </ui:composition>
 </body> 

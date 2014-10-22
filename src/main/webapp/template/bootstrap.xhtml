@@ -19,13 +19,12 @@
 			<div class="col-md-3">
 
 				<div class="panel panel-default">
-					<div class="panel-heading">Category</div>
+					<div class="panel-heading">Categories</div>
 					<ul class="list-group">
 							<li class="list-group-item">
-							<h:link value="All Products" outcome="/product/list.xhtml">
+							<h:link value="[All Products]" outcome="/product/list.xhtml">
 								</h:link></li>
 						<ui:repeat var="c" value="#{shopController.allCategories}">
-
 							<li class="list-group-item">
 							<h:link value="#{c.name}" outcome="/product/list.xhtml">
 									<f:param name="id" value="#{c.id}" />
