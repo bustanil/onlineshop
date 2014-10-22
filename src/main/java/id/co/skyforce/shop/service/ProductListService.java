@@ -26,5 +26,21 @@ public class ProductListService {
 	public ProductListService(){
 		
 	}
+	
+	public List getAllProduct(){
+		List <Product> prd;
+		Session session = HibernateUtil.openSession();
+		Transaction trx = session.beginTransaction();
+		
+		prd = session.createQuery("from Product").list();
+		
+		for (Product pro : prd) {
+			Hibernate.initialize(pro.getCategory().getId());
+			Hibernate.initialize(pro.getSupplier()); //untuk manggil lazy fetch type
+		}
+		trx.commit();
+		session.close();
+		return prd;
+	}
 
 }

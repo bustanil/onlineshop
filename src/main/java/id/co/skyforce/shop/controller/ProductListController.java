@@ -23,10 +23,14 @@ public class ProductListController {
 	public ProductListController() {
 		String catId = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap().get("id");
+		if(catId!=null){
 		Long categoryId = Long.parseLong(catId);
 		ProductListService pls = new ProductListService();
 		prd = pls.getProductByCategory(categoryId);
-		
+		}else{
+			ProductListService pls = new ProductListService();
+			prd = pls.getAllProduct();
+		}
 	}
 
 	public List<Product> getPrd() {
