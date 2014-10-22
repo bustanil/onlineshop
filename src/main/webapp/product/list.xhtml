@@ -14,47 +14,25 @@
 				<ui:repeat var="p" value="#{productListController.prd}">
 
 					<li class="list-group-item">
-					<h:outputText value="#{p.name}" />
+					<div class="row">
+					<div class="col-md-3">
+					<h:outputText value="#{p.name}" /><br/>
+					Price: <h:outputText value="#{p.price} " />
+					</div>
+					<div class="col-md-2">
+					<h:form>
+					<h:commandLink value="Add To Chart" action="#{pc.delete}">
+					<f:param name="id" value="#{p.id}"/>
+				    </h:commandLink>
+				    </h:form>
+				   </div>
+		
+					 </div>
 					</li>
-					
 				</ui:repeat>
 			</ul>
-			<h:form>
-		<h:dataTable var="p" value="#{productListController.prd}">
-			<h:column>
-				<f:facet name="header">Category</f:facet>
-				<h:outputText value="#{p.category.id} #{p.category.name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Product ID</f:facet>
-				<h:outputText value="#{p.id}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Description</f:facet>
-				<h:outputText value="#{p.description}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Name</f:facet>
-				<h:outputText value="#{p.name}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Price</f:facet>
-				<h:outputText value="#{p.price} " />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Stock</f:facet>
-				<h:outputText value="#{p.stock} " />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Action</f:facet>
-				<h:commandLink value="Add To Chart" action="#{pc.delete}">
-					<f:param name="id" value="#{p.id}">
-					</f:param>
-				</h:commandLink>
-			</h:column>
-		</h:dataTable>
-	</h:form>
+			
+		
 	
 </ui:define>
 </ui:composition>
