@@ -10,6 +10,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+
+
 public class ProductListService {
 
 	public List getProductByCategory(Long categoryId){
@@ -42,5 +44,6 @@ public class ProductListService {
 		session.close();
 		return prd;
 	}
+
 
 }

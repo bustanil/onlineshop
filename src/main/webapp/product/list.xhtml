@@ -4,13 +4,17 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+
 <h:head></h:head>
 <body>
 	<ui:composition template="/template/bootstrap.xhtml">
+
 		<ui:define name="panelHeading">
 			<h3>Product List</h3>
 		</ui:define>
+
 		<ui:define name="content">
+
 
 			<ul class="list-group">
 				<ui:repeat var="p" value="#{productListController.prd}">
@@ -20,9 +24,9 @@
 							<div class="col-md-2">No image here</div>
 							<div class="col-md-2">
 								<div class="row">
-									<h:link value="#{p.name}">
-										<f:param name="id" value="#{p.id}" />
-									</h:link>
+								<h:link value="#{p.name}" outcome="/product/detail.xhtml">
+									<f:param name="id" value="#{p.id}" />
+								</h:link>
 								</div>
 								<div class="row">
 									Price:
@@ -30,13 +34,11 @@
 								</div>
 							</div>
 
-
 						</div>
+
 					</li>
 				</ui:repeat>
 			</ul>
-
-
 
 		</ui:define>
 	</ui:composition>
