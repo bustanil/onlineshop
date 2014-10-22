@@ -71,6 +71,13 @@ public class CustomerController {
 		
 	public void Login(){
 		
+		/*
+			String sql = "UPDATE mahasiswa SET Nama_Depan='"+Nama_Depan+"'  WHERE NIM = '"+NIM+"'";
+			String sql1 = "UPDATE mahasiswa SET Nama_Belakang='"+Nama_Belakang+"'  WHERE NIM = '"+NIM+"'";
+			stmt.executeUpdate(sql);
+			stmt.executeUpdate(sql1);
+			System.out.println("Updated records into the table...");
+			*/
 		Session session = HibernateUtil.openSession();
 		Transaction trx = session.beginTransaction();
 	

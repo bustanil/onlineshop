@@ -14,14 +14,28 @@
 		<ui:include src="/template/header.xhtml" />
 
 		<div class="row">
-			<div class="col-md-3"> 
-			
-			<ui:repeat var="c" value="#{shopController.allCategories}">
-			<h:outputText value="#{c.name}" />
-			</ui:repeat>
-			
+
+
+			<div class="col-md-3">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Category</div>
+					<ul class="list-group">
+							<li class="list-group-item">
+							<h:link value="All Products" outcome="/product/list.xhtml">
+								</h:link></li>
+						<ui:repeat var="c" value="#{shopController.allCategories}">
+
+							<li class="list-group-item">
+							<h:link value="#{c.name}" outcome="/product/list.xhtml">
+									<f:param name="id" value="#{c.id}" />
+								</h:link></li>
+						</ui:repeat>
+					</ul>
+				</div>
+
 			</div>
-		
+
 			<div class="col-md-9">
 
 				<div class="panel panel-default">

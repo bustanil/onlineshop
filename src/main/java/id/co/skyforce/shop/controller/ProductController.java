@@ -11,9 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-
-
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,9 +23,6 @@ public class ProductController {
 	private Integer stock;
 	private String description;
 	private Long categoryId;
-
-
-
 
 	public ProductController() {
 		String idProduct = FacesContext.getCurrentInstance()
