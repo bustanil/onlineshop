@@ -6,6 +6,12 @@ import id.co.skyforce.shop.service.ShoppingCartService;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 @ManagedBean
 @SessionScoped
 public class ShoppingCartController {
@@ -20,7 +26,7 @@ public class ShoppingCartController {
 	public ShoppingCart getCart() {
 		return cart;
 	}
-
+	
 	public void setCart(ShoppingCart cart) {
 		this.cart = cart;
 	}

@@ -8,6 +8,12 @@ import org.hibernate.Transaction;
 import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.util.HibernateUtil;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 public class ProductDetailService {
 	public Product getDetailProduct() {
 

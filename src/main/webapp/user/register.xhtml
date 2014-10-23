@@ -14,87 +14,97 @@
 		
 				<ui:define name="content">
 		<h:form>
-			<table>
-				<tr>
-					<td>Salutation :</td>
-					<td><h:selectOneMenu value="#{registerController.salutation}">
+		
+
+			<h:message style="color:green;margin:8px;" />
+			
+				<div class="form-group">
+					<label for="usr">Salutation:</label> 
+					<h:selectOneMenu value="#{registerController.salutation}" class="form-control">
 							<f:selectItem itemValue="Mr" itemLabel="Mr" />
 							<f:selectItem itemValue="Mrs" itemLabel="Mrs" />
 							<f:selectItem itemValue="Ms" itemLabel="Ms" />
-						</h:selectOneMenu></td>
-				</tr>
-				<tr>
+						</h:selectOneMenu>
+				</div>
+				<div class="form-group">
+					<label for="usr">Nama Depan:</label>
+					 <h:inputText value="#{registerController.firstName}"
+							required="true" label="Nama Depan" class="form-control"/>
+				</div>
 
-					<td>Nama Depan :</td>
-					<td><h:inputText value="#{registerController.firstName}"
-							required="true" label="Nama Depan" /></td>
-				</tr>
-				<tr>
-					<td>Nama Belakang :</td>
-					<td><h:inputText value="#{registerController.lastName}"
-							required="true" label="Nama Belakang" /></td>
-				</tr>
-				<tr>
-					<td>Jenis Kelamin :</td>
-					<td><h:selectOneRadio value="#{registerController.gender}">
+				<div class="form-group">
+					<label for="usr">Nama Belakang:</label> 
+					<h:inputText value="#{registerController.lastName}"
+							required="true" label="Nama Belakang" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Jenis Kelamin:</label> 
+					<h:selectOneRadio value="#{registerController.gender}" class="form-control">
 							<f:selectItem itemValue="P" itemLabel="Pria" />
 							<f:selectItem itemValue="W" itemLabel="Wanita" />
-						</h:selectOneRadio></td>
-				</tr>
-				<tr>
-					<td>Email :</td>
-					<td><h:inputText value="#{registerController.email}"
-							required="true" label="Email">
+						</h:selectOneRadio>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Email:</label> 
+					<h:inputText value="#{registerController.email}"
+							required="true" label="Email" class="form-control">
 							<f:validateRegex
 								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-						</h:inputText></td>
-				</tr>
-				<tr>
-					<td>Telp Rumah :</td>
-					<td><h:inputText value="#{registerController.homePhone}"
-							required="true" label="Telp Rumah" /></td>
-				</tr>
-				<tr>
-					<td>Telp Genggam :</td>
-					<td><h:inputText value="#{registerController.mobileNo}"
-							required="true" label="Telp Genggam" /></td>
-				</tr>
-				<tr>
-					<td>Kata sandi :</td>
-					<td><h:inputSecret value="#{registerController.password}"
-							required="true" redisplay="true" label="kata sandi">
+						</h:inputText>
+				</div>
+
+				<div class="form-group">
+					<label for="usr">Telp Rumah :</label> 
+					<h:inputText value="#{registerController.homePhone}" 
+					required="true" label="Telp Rumah" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Hp:</label> 
+					<h:inputText value="#{registerController.mobileNo}"
+							required="true" label="Telp Genggam" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Kata sandi:</label> 
+					<h:inputSecret value="#{registerController.password}"
+							required="true" redisplay="true" label="kata sandi" class="form-control">
 							<f:validateLength maximum="50" minimum="5" />
-						</h:inputSecret></td>
-				</tr>
-				<tr>
-					<td>Tanggal lahir (dd-MM-yyyy) :</td>
-					<td><h:inputText value="#{registerController.birthDate}">
+						</h:inputSecret>
+				</div>
+
+				<div class="form-group">
+					<label for="usr">Tanggal Lahir:</label> 
+					<h:inputText value="#{registerController.birthDate}" class="form-control">
 							<f:convertDateTime pattern="dd-MM-yyyy" />
-						</h:inputText></td>
-				</tr>
-				<tr>
-					<td>Alamat :</td>
-					<td><h:inputText value="#{registerController.street}"
-							required="true" label="jalan" /></td>
-				</tr>
-				<tr>
-					<td>Kota :</td>
-					<td><h:inputText value="#{registerController.city}"
-							required="true" label="kota" /></td>
-				</tr>
-				<tr>
-					<td>Kode pos :</td>
-					<td><h:inputText value="#{registerController.postalCode}"
-							required="true" label="kode pos" /></td>
-				</tr>
-				<tr>
+						</h:inputText>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Alamat:</label> 
+					<h:inputText value="#{registerController.street}"
+							required="true" label="jalan"  class="form-control" />
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Kota:</label> 
+					<h:inputText value="#{registerController.city}"
+							required="true" label="kota" class="form-control" />
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Kode Pos:</label> 
+					<h:inputText value="#{registerController.postalCode}"
+							required="true" label="kode pos" class="form-control"/>
+				</div>
+				
+				<h:commandButton action="#{registerController.simpanCustomer}" value="Kirim" />
 
-					<td><h:commandButton action="#{registerController.simpanCustomer}" value="Kirim" /></td>
-				</tr>
-			</table>
-
-			<h:message style="color:green;margin:8px;" />
-		</h:form>
+			</h:form>
+		
+		
 		</ui:define>
 </ui:composition>
 </body>
