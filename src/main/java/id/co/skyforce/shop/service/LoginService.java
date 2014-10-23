@@ -43,7 +43,9 @@ public class LoginService {
 		return cust;
 	}
 	
-	public void logout(){
-		cust= null;
+	public String logout(){
+		cust= null; 
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	     return "/index";
 	}
 }
