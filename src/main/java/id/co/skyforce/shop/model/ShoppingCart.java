@@ -1,5 +1,11 @@
 package id.co.skyforce.shop.model;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 public class ShoppingCart {
 	private Integer countItem = 0;
 

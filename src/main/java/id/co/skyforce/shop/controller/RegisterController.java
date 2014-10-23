@@ -8,6 +8,12 @@ import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 @ManagedBean
 public class RegisterController {
 
