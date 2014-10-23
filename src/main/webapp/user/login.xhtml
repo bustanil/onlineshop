@@ -18,17 +18,17 @@
 			<h:form>
 				<div class="form-group">
 					<label for="usr">Email:</label>
-					<h:inputText value="#{customerController.email}" required="true"
+					<h:inputText value="#{loginController.email}" required="true"
 						label="Username" class="form-control" />
 				</div>
 				<div class="form-group">
 					<label for="pwd">Password:</label>
-					<h:inputSecret value="#{customerController.password}"
+					<h:inputSecret value="#{loginController.password}"
 						required="true" redisplay="true" label="kata sandi" class="form-control">
 						<f:validateLength maximum="50" minimum="5" />
 					</h:inputSecret>
 				</div>
-				<h:commandButton action="#{customerController.login}" value="Login"
+				<h:commandButton action="#{loginController.login}" value="Login"
 				 />
 
 			</h:form>
