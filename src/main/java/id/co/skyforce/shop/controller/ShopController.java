@@ -24,6 +24,7 @@ public class ShopController {
 
 	public void setAllCategories(List<Category> allCategories) {
 		this.allCategories = allCategories;
+		
 	}
 
 }

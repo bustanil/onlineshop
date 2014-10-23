@@ -1,19 +1,13 @@
 package id.co.skyforce.shop.controller;
 
+import id.co.skyforce.shop.model.Product;
+import id.co.skyforce.shop.service.ProductListService;
+
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-
-import id.co.skyforce.shop.service.ProductListService;
-import id.co.skyforce.shop.service.ProductService;
-import id.co.skyforce.shop.util.HibernateUtil;
-import id.co.skyforce.shop.model.*;
 
 @ManagedBean
 public class ProductListController {
@@ -31,6 +25,7 @@ public class ProductListController {
 			ProductListService pls = new ProductListService();
 			prd = pls.getAllProduct();
 		}
+
 	}
 
 	public List<Product> getPrd() {
