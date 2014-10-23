@@ -1,39 +1,51 @@
 package id.co.skyforce.shop.service;
 
 
+import id.co.skyforce.shop.model.Customer;
+import id.co.skyforce.shop.model.Product;
+import id.co.skyforce.shop.util.HibernateUtil;
+
+import java.util.List;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import id.co.skyforce.shop.model.Customer;
-import id.co.skyforce.shop.util.HibernateUtil;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 
 public class LoginService {
+	
+	//String url;
 
-	public static Query query;
-	Customer cus = new Customer();
-	public Customer login(Customer customer){
+	Customer cust = new Customer();
+	public boolean login(String email, String password){
 		Session session = HibernateUtil.openSession();
 		Transaction trx = session.beginTransaction();
-		query = session.createQuery("from Customer where email = :email and password =:password ");
-		query.setString("email", customer.getEmail());
-		query.setString("password", customer.getPassword());
-		
-		customer = (Customer) query.uniqueResult();
-		return customer;
-	}
-	/*query = session.createQuery(hqlStatement);
-		query.setString("search_string", "%" + searchString + "%");
-		daftarProdukDicari = query.list();
-
-		for (Product product : daftarProdukDicari) {
-			System.out.printf("%-3d %-15s %-15s %15.0f %4d\n", product.getId(),
-					product.getCategory().getName(), product.getName(),
-					product.getPrice(), product.getStock());
+		Query query = session.createQuery("from Customer c where c.email=:email and c.password=:password");
+		query.setString("email", email);
+		query.setString("password", password);
+		List<Customer> result = query.list();
+		trx.commit();
+		session.close();
+		if (!result.isEmpty()){
+			cust = result.get(0);
+			return true;
 		}
+		else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
+			return false;
+		}
+	}
+	
+	public Customer getCustomer(){
+		return cust;
+	}
+	
+	public void logout(){
+		cust= null;
+	}
 
-		daftarProdukDicari = null;
-
-		System.out.println();
-	}*/
 }

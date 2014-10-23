@@ -1,68 +1,62 @@
 package id.co.skyforce.shop.controller;
 
+import java.io.Serializable;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.service.LoginService;
 
-import javax.faces.bean.ManagedBean;
-
 @ManagedBean
-public class LoginController {
+@SessionScoped
+public class LoginController implements Serializable {
 
 	private String email;
 	private String password;
+	String url;
 	
-	private Customer customer = new Customer();
-	
-	public void Login(){
-		customer.getEmail();
-		customer.getPassword();
-		
-		LoginService loginSer = new LoginService();
-		loginSer.login(customer); 
-		customer = loginSer.login(customer);
+	public String login(){
+		LoginService ls = new LoginService();
+		boolean result = ls.login(email, password);
+		if (result){
+			HttpSession session = (HttpSession) FacesContext.
+			          getCurrentInstance().
+			          getExternalContext().
+			          getSession(false);
+			Customer cust = new Customer();
+			cust = ls.getCustomer();
+            session.setAttribute("lastName", cust.getLastName());
+ 
+            return url;
+		}
+		else{
+			FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Invalid Login!",
+                    "Please Try Again!"));
+            return "login";
+		}
 	}
-	
 
-	/**
-	 * @return the email
-	 */
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-	/**
-	 * @param password the password to set
-	 */
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	/**
-	 * @return the customer
-	 */
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	/**
-	 * @param customer the customer to set
-	 */
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 	
 }
