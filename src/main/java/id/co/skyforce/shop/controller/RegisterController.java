@@ -26,11 +26,9 @@ public class RegisterController {
 	private String postalCode;
 	private Long customerId;
 	private Long addressId;
+	private Customer customer = new Customer();
 	
-	
-	
-	public RegisterController() {
-		Customer customer = new Customer();
+	public void simpanCustomer(){
 		customer.setFirstName(firstName);
 		customer.setLastName(lastName);
 		customer.setBirthDate(birthDate);

@@ -33,13 +33,13 @@ public class Product implements Serializable {
 	@Column(name = "description", nullable = false)
 	private String description;
 	
-/*	@ManyToOne(fetch = FetchType.LAZY) // default eager fetch
-	@JoinColumn(name = "category_id")
-	private Category category;*/
-	
-	@ManyToOne // default eager fetch
+	@ManyToOne(fetch = FetchType.LAZY) // default eager fetch
 	@JoinColumn(name = "category_id")
 	private Category category;
+	
+/*	@ManyToOne // default eager fetch
+	@JoinColumn(name = "category_id")
+	private Category category;*/
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "supplier_id")
