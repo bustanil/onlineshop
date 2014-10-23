@@ -6,13 +6,14 @@
 
 
 <body>
-	<h3>
+	<ui:composition template="/template/bootstrap.xhtml">
+	
+			<ui:define name="panelHeading">
+			<h3>Customer Data</h3>
+		</ui:define>
+		
+				<ui:define name="content">
 		<h:form>
-
-			<h:inputHidden value="#{customerController.customerId}"
-				converter="javax.faces.Long" />
-			<h:inputHidden value="#{customerController.addressId}"
-				converter="javax.faces.Long" />
 			<table>
 				<tr>
 					<td>Salutation :</td>
@@ -94,6 +95,7 @@
 
 			<h:message style="color:green;margin:8px;" />
 		</h:form>
-	</h3>
+		</ui:define>
+</ui:composition>
 </body>
 </html>

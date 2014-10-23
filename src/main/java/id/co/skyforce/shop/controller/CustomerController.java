@@ -31,86 +31,13 @@ public class CustomerController {
 	private String postalCode;
 	private Long customerId;
 	private Long addressId;
-
-	public void Register() {
-
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-		Customer cus = new Customer();
-
-		cus.setId(customerId);
-
-		cus.setFirstName(firstName);
-		cus.setLastName(lastName);
-		cus.setEmail(email);
-		cus.setHomePhone(homePhone);
-		cus.setMobileNo(mobileNo);
-		cus.setPassword(password);
-		cus.setBirthDate(birthDate);
-		cus.setGender(gender);
-		cus.setSalutation(salutation);
-
-		Address ad = new Address();
-		ad.setId(addressId);
-		ad.setStreet(street);
-		ad.setCity(city);
-		ad.setPostalCode(postalCode);
-		cus.setAddress(ad);
-
-		session.save(cus);
-		trx.commit();
-		session.close();
+	
+	public CustomerController() {
+		Customer c = new Customer();
+		c.setFirstName(firstName);
+		c.
 	}
 
-	public void Login() {
-		
-		/*
-		 * String sql =
-		 * "SELECT customer GET id='"+id+"'  WHERE password = '"
-		 * +password+"'"; String sql1 =
-		 * "UPDATE mahasiswa SET Nama_Belakang='"+Nama_Belakang
-		 * +"'  WHERE NIM = '"+NIM+"'"; stmt.executeUpdate(sql);
-		 * stmt.executeUpdate(sql1);
-		 * System.out.println("Updated records into the table...");
-		 */
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-
-		Customer cus = new Customer();
-		cus = (Customer) session.createQuery("from Customer where id")
-				.uniqueResult();
-		cus = (Customer) session.createQuery("from Customer where password")
-				.uniqueResult();
-		trx.commit();
-		session.close();
-
-	}
-
-	/*
-	 * @ManagedBean public class CustomerListController {
-	 * 
-	 * private List<Customer> customers;
-	 * 
-	 * 
-	 * 
-	 * public CustomerListController() { Session session =
-	 * HibernateUtil.openSession(); Transaction trx =
-	 * session.beginTransaction();
-	 * 
-	 * customers =
-	 * session.createQuery("from Customer where email").uniqueResult();
-	 * 
-	 * trx.commit(); session.close();
-	 * 
-	 * }
-	 * 
-	 * public List<Customer> getCustomers() { return customers; }
-	 * 
-	 * public void setCustomers(List<Customer> customers) { this.customers =
-	 * customers; }
-	 * 
-	 * }
-	 */
 	public Long getAddressId() {
 		return addressId;
 	}
