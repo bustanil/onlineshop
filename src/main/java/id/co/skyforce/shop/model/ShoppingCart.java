@@ -1,14 +1,14 @@
 package id.co.skyforce.shop.model;
 
 public class ShoppingCart {
-	private Integer jumlahBelanjaan;
+	private Integer countItem = 0;
 
-	public Integer getJumlahBelanjaan() {
-		return jumlahBelanjaan;
+	public Integer getCountItem() {
+		return countItem;
 	}
 
-	public void setJumlahBelanjaan(Integer jumlahBelanjaan) {
-		this.jumlahBelanjaan = jumlahBelanjaan;
+	public void setCountItem(Integer countItem) {
+		this.countItem = countItem;
 	}
-
+	
 }
