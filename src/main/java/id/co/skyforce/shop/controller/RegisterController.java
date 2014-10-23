@@ -46,9 +46,13 @@ public class RegisterController {
 		address.setCity(city);
 		address.setPostalCode(postalCode);
 		
+		newCustomer(customer);
+		
+	}
+	
+	public void newCustomer(Customer customer) {
 		RegisterService regService = new RegisterService();
 		regService.register(customer);
-		
 	}
 
 	public String getEmail() {
