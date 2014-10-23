@@ -40,4 +40,9 @@ public class ProductListController {
 	public void setPrd(List<Product> prd) {
 		this.prd = prd;
 	}
+	
+	
+	
+	
+	
 }
