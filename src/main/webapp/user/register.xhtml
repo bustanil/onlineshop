@@ -9,7 +9,7 @@
 	<ui:composition template="/template/bootstrap.xhtml">
 	
 			<ui:define name="panelHeading">
-			<h3>Customer Data</h3>
+			<h3>Register</h3>
 		</ui:define>
 		
 				<ui:define name="content">
@@ -88,8 +88,8 @@
 							required="true" label="kode pos" /></td>
 				</tr>
 				<tr>
-					<td><h:commandButton action="#{registerController.}"
-							value="Kirim" /></td>
+
+					<td><h:commandButton action="#{registerController.simpanCustomer}" value="Kirim" /></td>
 				</tr>
 			</table>
 

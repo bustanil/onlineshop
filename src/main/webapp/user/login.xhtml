@@ -6,11 +6,18 @@
 
 <h:head>Login</h:head>
 <body>
-    <h3>
+
+	<ui:composition template="/template/bootstrap.xhtml">
+	
+			<ui:define name="panelHeading">
+			<h3>Login</h3>
+		</ui:define>
+		
+				<ui:define name="content">
         <h:form>
             <table>
                 <tr>
-                    <td>Username :</td>
+                    <td>Email :</td>
                     <td><h:inputText value="#{customerController.email}"
                             required="true" label="Username" /></td>
                 </tr>
@@ -22,12 +29,13 @@
                         </h:inputSecret></td>
                 </tr>
                 <tr>
-                    <td><h:commandButton action="#{customerController.Login}"
-                            value="Login" /></td>
+                    <td><h:commandButton action="#{customerController.login}" value="Login" /></td>
                 </tr>
             </table>
         </h:form>
-    </h3>
+</ui:define>
+
+</ui:composition>
 
 </body>
 </html>
