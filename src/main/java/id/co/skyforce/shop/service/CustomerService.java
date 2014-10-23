@@ -14,5 +14,13 @@ import org.hibernate.Transaction;
 @ManagedBean
 public class CustomerService {
 	
+	public void registerCustomer(Customer customer){
+		Session session = HibernateUtil.openSession();
+		Transaction trx  = session.beginTransaction();
+		
+		session.save(customer);
+		trx.commit();
+		session.close();
+	}
 
 }

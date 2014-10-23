@@ -42,8 +42,8 @@
 						</li>
 					</h:panelGroup>
 					<li><a><span class="glyphicon glyphicon-shopping-cart">(<span id="shoppingCartSize">0</span>)</span></a></li>
-					<li><h:link value="Login" rendered="#{not customerLogin.loggedIn}" /></li>
-					<li><h:link value="Register" rendered="#{not customerLogin.loggedIn}" /></li>
+					<li><h:link value="Login"  outcome="/user/login.xhtml" rendered="#{not customerLogin.loggedIn}" /></li>
+					<li><h:link value="Register" outcome="/user/register.xhtml" rendered="#{not customerLogin.loggedIn}" /></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

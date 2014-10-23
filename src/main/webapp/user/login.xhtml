@@ -1,33 +1,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>Login</h:head>
 <body>
-	<h3>
-		<h:form>
-			<table>
-				<tr>
-					<td>Username :</td>
-					<td><h:inputText value="#{customerController.email}"
-							required="true" label="Username" /></td>
-				</tr>
-				<tr>
-					<td>Kata sandi :</td>
-					<td><h:inputSecret value="#{customerController.password}"
-							required="true" redisplay="true" label="kata sandi">
-							<f:validateLength maximum="50" minimum="5" />
-						</h:inputSecret></td>
-				</tr>
-				<tr>
-					<td><h:commandButton action="#{customerController.Login}"
-							value="Login" /></td>
-				</tr>
-			</table>
-		</h:form>
-	</h3>
+
+	<ui:composition template="/template/bootstrap.xhtml">
+	
+			<ui:define name="panelHeading">
+			<h3>Login</h3>
+		</ui:define>
+		
+				<ui:define name="content">
+        <h:form>
+            <table>
+                <tr>
+                    <td>Email :</td>
+                    <td><h:inputText value="#{customerController.email}"
+                            required="true" label="Username" /></td>
+                </tr>
+                <tr>
+                    <td>Kata sandi :</td>
+                    <td><h:inputSecret value="#{customerController.password}"
+                            required="true" redisplay="true" label="kata sandi">
+                            <f:validateLength maximum="50" minimum="5" />
+                        </h:inputSecret></td>
+                </tr>
+                <tr>
+                    <td><h:commandButton action="#{customerController.login}" value="Login" /></td>
+                </tr>
+            </table>
+        </h:form>
+</ui:define>
+
+</ui:composition>
 
 </body>
 </html>

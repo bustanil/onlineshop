@@ -32,44 +32,17 @@ public class CustomerController {
 	private Long customerId;
 	private Long addressId;
 
-	public void Register() {
 
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-		Customer cus = new Customer();
-
-		//cus.setId(customerId);
-
-		cus.setFirstName(firstName);
-		cus.setLastName(lastName);
-		cus.setEmail(email);
-		cus.setHomePhone(homePhone);
-		cus.setMobileNo(mobileNo);
-		cus.setPassword(password);
-		cus.setBirthDate(birthDate);
-		cus.setGender(gender);
-		cus.setSalutation(salutation);
-
-		Address ad = new Address();
-		ad.setId(addressId);
-		ad.setStreet(street);
-		ad.setCity(city);
-		ad.setPostalCode(postalCode);
-		cus.setAddress(ad);
-
-		session.save(cus);
-		trx.commit();
-		session.close();
-	}
-
-	public void Login() {
+	public void login() {
 		
-		if(email.equals(email) && 
-				 password.equals(password)){
+/*		if(email.equals(email) &&  password.equals(password)){
 				 	System.out.println(email);
 				 			return;
-				 		}
-
+				 		}*/
+	}
+	
+	public void loggedIn(){
+		
 	}
 		/*
 		 * String sql =
@@ -80,18 +53,18 @@ public class CustomerController {
 		 * stmt.executeUpdate(sql1);
 		 * System.out.println("Updated records into the table...");
 		 */
-//		Session session = HibernateUtil.openSession();
-//		Transaction trx = session.beginTransaction();
-//
-//		Customer cus = new Customer();
-//		cus = (Customer) session.createQuery("from Customer where email")
-//				.uniqueResult();
-//		cus = (Customer) session.createQuery("from Customer where password")
-//				.uniqueResult();
-//		trx.commit();
-//		session.close();
-//
-//	}
+/*		Session session = HibernateUtil.openSession();
+		Transaction trx = session.beginTransaction();
+
+		Customer cus = new Customer();
+		cus = (Customer) session.createQuery("from Customer where email")
+				.uniqueResult();
+		cus = (Customer) session.createQuery("from Customer where password")
+				.uniqueResult();
+		trx.commit();
+		session.close();
+
+	}
 
 	/*
 	 * @ManagedBean public class CustomerListController {
