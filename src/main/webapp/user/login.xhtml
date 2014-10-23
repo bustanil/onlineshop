@@ -18,18 +18,18 @@
             <table>
                 <tr>
                     <td>Email :</td>
-                    <td><h:inputText value="#{customerController.email}"
+                    <td><h:inputText value="#{loginController.email}"
                             required="true" label="Username" /></td>
                 </tr>
                 <tr>
                     <td>Kata sandi :</td>
-                    <td><h:inputSecret value="#{customerController.password}"
+                    <td><h:inputSecret value="#{loginController.password}"
                             required="true" redisplay="true" label="kata sandi">
                             <f:validateLength maximum="50" minimum="5" />
                         </h:inputSecret></td>
                 </tr>
                 <tr>
-                    <td><h:commandButton action="#{customerController.login}" value="Login" /></td>
+                    <td><h:commandButton action="#{loginController.Login}" value="Login" /></td>
                 </tr>
             </table>
         </h:form>
