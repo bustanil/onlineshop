@@ -7,6 +7,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+/**
+ * 
+ * @author Sandy Septiandhy
+ *
+ */
 
 @ManagedBean
 public class ShopController {
