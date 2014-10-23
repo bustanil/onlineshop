@@ -38,7 +38,7 @@ public class CustomerController {
 		Transaction trx = session.beginTransaction();
 		Customer cus = new Customer();
 
-		cus.setId(customerId);
+		//cus.setId(customerId);
 
 		cus.setFirstName(firstName);
 		cus.setLastName(lastName);
@@ -64,6 +64,13 @@ public class CustomerController {
 
 	public void Login() {
 		
+		if(email.equals(email) && 
+				 password.equals(password)){
+				 	System.out.println(email);
+				 			return;
+				 		}
+
+	}
 		/*
 		 * String sql =
 		 * "SELECT customer GET id='"+id+"'  WHERE password = '"
@@ -73,18 +80,18 @@ public class CustomerController {
 		 * stmt.executeUpdate(sql1);
 		 * System.out.println("Updated records into the table...");
 		 */
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-
-		Customer cus = new Customer();
-		cus = (Customer) session.createQuery("from Customer where id")
-				.uniqueResult();
-		cus = (Customer) session.createQuery("from Customer where password")
-				.uniqueResult();
-		trx.commit();
-		session.close();
-
-	}
+//		Session session = HibernateUtil.openSession();
+//		Transaction trx = session.beginTransaction();
+//
+//		Customer cus = new Customer();
+//		cus = (Customer) session.createQuery("from Customer where email")
+//				.uniqueResult();
+//		cus = (Customer) session.createQuery("from Customer where password")
+//				.uniqueResult();
+//		trx.commit();
+//		session.close();
+//
+//	}
 
 	/*
 	 * @ManagedBean public class CustomerListController {
