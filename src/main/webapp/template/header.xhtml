@@ -5,6 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jstl/core">
 
+ 
 <ui:composition>
 	<!-- Static navbar -->
 	<div class="navbar navbar-default" role="navigation">
@@ -20,7 +21,7 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<h:panelGroup rendered="#{customerLogin.loggedIn}">
+					<h:panelGroup rendered="#{loginController.loggedIn}">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">My Account <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
@@ -42,8 +43,10 @@
 						</li>
 					</h:panelGroup>
 					<li><a><span class="glyphicon glyphicon-shopping-cart">(<span id="shoppingCartSize">0</span>)</span></a></li>
-					<li><h:link value="Login"  outcome="/user/login.xhtml" rendered="#{not customerLogin.loggedIn}" /></li>
-					<li><h:link value="Register" outcome="/user/register.xhtml" rendered="#{not customerLogin.loggedIn}" /></li>
+					<li><h:link value="Login"  outcome="/user/login.xhtml" rendered="#{not loginController.loggedIn}" /></li>
+					<li><h:link value="Register" outcome="/user/register.xhtml" rendered="#{not loginController.loggedIn}" /></li>
+					
+
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
