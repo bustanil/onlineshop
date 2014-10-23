@@ -4,16 +4,16 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head></h:head>
+<h:head>Login</h:head>
 <body>
 	<h3>
 		<h:form>
-			<h:table>
+			<table>
 				<tr>
 					<td>Username :</td>
-					<td><h:inputText value="#{customerController.customerId}"
+					<td><h:inputText value="#{customerController.email}"
 							required="true" label="Username" /></td>
-				</tr>			
+				</tr>
 				<tr>
 					<td>Kata sandi :</td>
 					<td><h:inputSecret value="#{customerController.password}"
@@ -22,10 +22,10 @@
 						</h:inputSecret></td>
 				</tr>
 				<tr>
-					<td><h:commandButton action="#{customerService.Login}"
+					<td><h:commandButton action="#{customerController.Login}"
 							value="Login" /></td>
 				</tr>
-			</h:table>
+			</table>
 		</h:form>
 	</h3>
 
