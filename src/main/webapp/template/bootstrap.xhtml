@@ -20,21 +20,19 @@
 
 
 			<div class="col-md-3">
+					<div class="panel panel-default">
+					<div class="panel-heading"><ui:insert name="panelHeading1"></ui:insert></div>
+					<div class="panel-body">
+						<ui:insert name="content1">
 
-				<div class="panel panel-default">
-					<div class="panel-heading">Categories</div>
-					<ul class="list-group">
-							<li class="list-group-item">
-							<h:link value="[All Products]" outcome="/product/list.xhtml">
-								</h:link></li>
-						<ui:repeat var="c" value="#{shopController.allCategories}">
-							<li class="list-group-item">
-							<h:link value="#{c.name}" outcome="/product/list.xhtml">
-									<f:param name="id" value="#{c.id}" />
-								</h:link></li>
-						</ui:repeat>
-					</ul>
+							<h3>Hello world</h3>
+
+						</ui:insert>
+	
+						
+					</div>
 				</div>
+
 
 			</div>
 
