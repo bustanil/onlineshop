@@ -50,6 +50,13 @@ public class LoginController implements Serializable {
 		}
 	}
 	
+	public String logout(){
+		cust = new Customer();
+		
+		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/product/list"; 
+	}
+	
 	public boolean isLoggedIn(){
 		if(cust.getFirstName()!=null){
 			return true;	
@@ -72,6 +79,14 @@ public class LoginController implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Customer getCust() {
+		return cust;
+	}
+
+	public void setCust(Customer cust) {
+		this.cust = cust;
 	}
 	
 }
