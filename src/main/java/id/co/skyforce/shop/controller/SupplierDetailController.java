@@ -6,7 +6,11 @@ import id.co.skyforce.shop.service.ProductDetailService;
 import id.co.skyforce.shop.service.SupplierDetailService;
 
 import javax.faces.bean.ManagedBean;
-
+/**
+ * 
+ * @author Wirahman
+ *
+ */
 @ManagedBean
 public class SupplierDetailController {
 
