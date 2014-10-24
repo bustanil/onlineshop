@@ -8,6 +8,12 @@ import id.co.skyforce.shop.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+/**
+ * 
+ * @author Sandy Septiandhy
+ *
+ */
+
 public class ShopService {
 	
 	public List getAllCategory(){

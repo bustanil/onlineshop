@@ -11,6 +11,12 @@ import javax.servlet.http.HttpSession;
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.service.LoginService;
 
+/**
+ * 
+ * @author Saddam Hussein
+ *
+ */
+
 @ManagedBean
 @SessionScoped
 public class LoginController implements Serializable {
@@ -82,6 +88,5 @@ public class LoginController implements Serializable {
 	public void setCust(Customer cust) {
 		this.cust = cust;
 	}
-	
 	
 }

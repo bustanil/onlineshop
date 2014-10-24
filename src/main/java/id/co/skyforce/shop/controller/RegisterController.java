@@ -9,6 +9,12 @@ import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 @ManagedBean
 public class RegisterController {
 
@@ -44,7 +50,12 @@ public class RegisterController {
 		address.setStreet(street);
 		address.setCity(city);
 		address.setPostalCode(postalCode);
-		customer.setAddress(address);
+		
+		newCustomer(customer);
+		
+	}
+	
+	public void newCustomer(Customer customer) {
 		RegisterService regService = new RegisterService();
 		regService.register(customer);
 	}
