@@ -42,48 +42,46 @@
 		<ui:define name="content">
 
 			<h:form>
-
-<!-- <h:inputHidden value="zx" converter="javax.faces.Long" />
-<h:inputHidden value="zx" converter="javax.faces.Long" /> -->
+ <h:inputHidden value="#{productController.productId}" converter="javax.faces.Long" />
 
 
 <div class="form-group">
 <label>Category:</label>
- <h:selectOneMenu value="productController" class="form-control" >
-<!-- 		<f:selectItems var="c" value="something" itemValue="1" itemLabel="bla"/> -->
+ <h:selectOneMenu value="#{productController.categoryId}" class="form-control" >
+<f:selectItems var="c" value="#{productController.categories}" itemValue="#{c.id}" itemLabel="#{c.name}"/>
 </h:selectOneMenu>
 </div>
 
 <div class="form-group">
 <label>Name:</label>
-<h:inputText value="name" class="form-control" required="true"/>
+<h:inputText value="#{productController.name}" class="form-control" required="true"/>
 </div>
 
 <div class="form-group">
 <label >Price:</label>
-<h:inputText value="price" class="form-control" />
+<h:inputText value="#{productController.price}" class="form-control" />
 </div>
 
 <div class="form-group">
 <label >Stock:</label>
-<h:inputText value="stock" class="form-control" />
+<h:inputText value="#{productController.stock}" class="form-control" />
 </div>
 
 <div class="form-group">
 <label >Description:</label>
-<h:inputText value="description" class="form-control" />
+<h:inputText value="#{productController.description}" class="form-control" />
 </div>
 
 <div class="form-group">
 <label >Supplier:</label>
-<h:selectOneMenu value="supplier id" class="form-control" >
-<!-- 	<f:selectItems var="s" value="list supplier" itemValue="#{1}" itemLabel="#{bla}"/> -->
+<h:selectOneMenu value="#{productController.supplierId}" class="form-control" >
+<f:selectItems var="s" value="#{productController.suppliers}" itemValue="#{s.id}" itemLabel="#{s.name}"/> 
 
 </h:selectOneMenu>
 </div>
 
 <div class="form-group">
-<h:commandButton action="save" value="Submit" class="form-control"  />
+<h:commandButton action="#{productController.save}" value="Submit" class="form-control"  />
 </div>
 <div class="form-group">
 <h:commandButton action="listproduct" value="Cancel" class="form-control"  />

@@ -1,5 +1,7 @@
 package id.co.skyforce.shop.controller;
 
+import java.io.Serializable;
+
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.service.LoginService;
 
@@ -12,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped
-public class LoginAdminController {
+public class LoginAdminController implements Serializable {
 	private String email;
 	private String password;
 	String url;
@@ -40,6 +42,13 @@ public class LoginAdminController {
                     "Please Try Again!"));
             return "login";
 		}
+	}
+	
+	public String logout(){
+		cust = new Customer();
+		
+		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/product/list"; 
 	}
 	
 	public boolean isLoggedIn(){
