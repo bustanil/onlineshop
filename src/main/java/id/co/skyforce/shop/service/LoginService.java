@@ -54,4 +54,5 @@ public class LoginService {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 	     return "/index";
 	}
+
 }

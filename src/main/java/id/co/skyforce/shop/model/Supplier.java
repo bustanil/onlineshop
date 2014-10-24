@@ -64,5 +64,10 @@ public class Supplier {
 		return "Supplier [id=" + id + ", name=" + name + ", categories="
 				+ categories + "]";
 	}
+
+	public Product getCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

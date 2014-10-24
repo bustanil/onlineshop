@@ -65,8 +65,11 @@
 </div>
 
 <div class="form-group">
-<label >Price:</label>
-<h:inputText value="price" class="form-control" />
+<label>Gender:</label>
+<h:selectOneRadio value="#{customerController.gender}"  class="form-control">
+							<f:selectItem itemValue="P" itemLabel="Pria"  class="form-control"/>
+							<f:selectItem itemValue="W" itemLabel="Wanita"  class="form-control"/>
+						</h:selectOneRadio>
 </div>
 
 <div class="form-group">
