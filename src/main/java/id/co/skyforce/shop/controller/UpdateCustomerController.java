@@ -1,16 +1,28 @@
 package id.co.skyforce.shop.controller;
 
+import java.util.Date;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+
+
+
 import id.co.skyforce.shop.model.Address;
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.model.CustomerStatus;
 import id.co.skyforce.shop.service.RegisterService;
+import id.co.skyforce.shop.service.UpdateCustomerService;
+import id.co.skyforce.shop.util.HibernateUtil;
 
-import java.util.Date;
-
-import javax.faces.bean.ManagedBean;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 @ManagedBean
-public class RegisterController {
+@SessionScoped
+public class UpdateCustomerController {
 
 	private String email;
 	private String password;
@@ -21,32 +33,76 @@ public class RegisterController {
 	private String homePhone;
 	private String salutation;
 	private Character gender;
+	private String status;
 
 	private String street;
 	private String city;
 	private String postalCode;
 	private Long customerId;
 	private Long addressId;
-	private Customer customer = new Customer();
-	
-	public void simpanCustomer(){
+	//private S customer;
+	Customer customer = new Customer();
+
+	public UpdateCustomerController(){
+		String IdCustomer=  FacesContext.getCurrentInstance().
+				getExternalContext().getRequestParameterMap().get("idcustomer");
+		customerId = Long.valueOf(IdCustomer);
+		UpdateCustomerService ucs = new UpdateCustomerService();
+		customer = ucs.getCustomer(customerId);
+
+		//		LoginController lc = new LoginController();
+		//		customer = lc.getCust();
+
+		email = customer.getEmail();
+		firstName = customer.getFirstName();
+		lastName = customer.getLastName();
+		birthDate = customer.getBirthDate();
+		mobileNo = customer.getMobileNo();
+		homePhone = customer.getHomePhone();
+		salutation = customer.getSalutation();
+		gender = customer.getGender();
+		street = customer.getAddress().getStreet();
+		postalCode = customer.getAddress().getPostalCode();
+		city = customer.getAddress().getCity();
+
+	}
+
+	public String updateCustomer(){
+		if(!password.equals(customer.getPassword())){
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Invalid password!",
+							"Please Try Again!"));
+			return "update";
+		}
+		customer.setId(customerId);
 		customer.setFirstName(firstName);
 		customer.setLastName(lastName);
 		customer.setBirthDate(birthDate);
+		customer.setStatus(CustomerStatus.ACTIVE);
 		customer.setEmail(email);
 		customer.setPassword(password);
 		customer.setMobileNo(mobileNo);
 		customer.setHomePhone(homePhone);
 		customer.setSalutation(salutation);
 		customer.setGender(gender);
-		customer.setStatus(CustomerStatus.ACTIVE);
-		Address address = new Address();
-		address.setStreet(street);
-		address.setCity(city);
-		address.setPostalCode(postalCode);
-		customer.setAddress(address);
-		RegisterService regService = new RegisterService();
-		regService.register(customer);
+		
+		customer.getAddress().setCity(city);
+		customer.getAddress().setPostalCode(postalCode);
+		customer.getAddress().setStreet(street);
+
+		UpdateCustomerService ucs = new UpdateCustomerService();
+		ucs.update(customer);
+		return "/product/list";
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getEmail() {
@@ -159,6 +215,14 @@ public class RegisterController {
 
 	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

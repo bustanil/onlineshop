@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<body>
+	<ui:composition template="/template/bootstrap.xhtml">
+	
+			<ui:define name="panelHeading">
+			<h3>Update Customer</h3>
+		</ui:define>
+		
+				<ui:define name="content">
+		<h:form>
+		
+
+			<h:message style="color:green;margin:8px;" />
+			
+				<div class="form-group">
+					<label for="usr">Salutation:</label> 
+					<h:selectOneMenu value="#{updateCustomerController.salutation}" class="form-control">
+							<f:selectItem itemValue="Mr" itemLabel="Mr" />
+							<f:selectItem itemValue="Mrs" itemLabel="Mrs" />
+							<f:selectItem itemValue="Ms" itemLabel="Ms" />
+						</h:selectOneMenu>
+				</div>
+				<div class="form-group">
+					<label for="usr">Nama Depan:</label>
+					 <h:inputText value="#{updateCustomerController.firstName}"
+							required="true" label="Nama Depan" class="form-control"/>
+				</div>
+
+				<div class="form-group">
+					<label for="usr">Nama Belakang:</label> 
+					<h:inputText value="#{updateCustomerController.lastName}"
+							required="true" label="Nama Belakang" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Jenis Kelamin:</label> 
+					<h:selectOneRadio value="#{updateCustomerController.gender}" class="form-control">
+							<f:selectItem itemValue="P" itemLabel="Pria" />
+							<f:selectItem itemValue="W" itemLabel="Wanita" />
+						</h:selectOneRadio>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Email:</label> 
+					<h:inputText value="#{updateCustomerController.email}"
+							required="true" label="Email" class="form-control">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</h:inputText>
+				</div>
+
+				<div class="form-group">
+					<label for="usr">Telp Rumah :</label> 
+					<h:inputText value="#{updateCustomerController.homePhone}" 
+					required="true" label="Telp Rumah" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Hp:</label> 
+					<h:inputText value="#{updateCustomerController.mobileNo}"
+							required="true" label="Telp Genggam" class="form-control"/>
+				</div>
+				
+
+				<div class="form-group">
+					<label for="usr">Tanggal Lahir:</label> 
+					<h:inputText value="#{updateCustomerController.birthDate}" class="form-control">
+							<f:convertDateTime pattern="dd-MM-yyyy" />
+						</h:inputText>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Alamat:</label> 
+					<h:inputText value="#{updateCustomerController.street}"
+							required="true" label="jalan"  class="form-control" />
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Kota:</label> 
+					<h:inputText value="#{updateCustomerController.city}"
+							required="true" label="kota" class="form-control" />
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Kode Pos:</label> 
+					<h:inputText value="#{updateCustomerController.postalCode}"
+							required="true" label="kode pos" class="form-control"/>
+				</div>
+				
+				<div class="form-group">
+					<label for="usr">Validasi Kata sandi:</label> 
+					<h:inputSecret value="#{updateCustomerController.password}"
+							required="true" redisplay="true" label="kata sandi" class="form-control" />
+							
+				</div>
+				<h:commandButton action="#{updateCustomerController.updateCustomer}" value="Update" />
+
+			</h:form>
+		
+		
+		</ui:define>
+</ui:composition>
+</body>
+</html>
