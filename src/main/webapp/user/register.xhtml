@@ -7,7 +7,23 @@
 
 <body>
 	<ui:composition template="/template/bootstrap.xhtml">
-	
+	<ui:define name="panelHeadingCat">Category</ui:define> 
+		<ui:define name="contentCat">
+
+				
+					<ul class="list-group">
+							<li class="list-group-item">
+							<h:link value="[All Products]" outcome="/product/list.xhtml">
+								</h:link></li>
+						<ui:repeat var="c" value="#{shopController.allCategories}">
+							<li class="list-group-item">
+							<h:link value="#{c.name}" outcome="/product/list.xhtml">
+									<f:param name="id" value="#{c.id}" />
+								</h:link></li>
+						</ui:repeat>
+					</ul>
+
+				</ui:define>
 			<ui:define name="panelHeading">
 			<h3>Register</h3>
 		</ui:define>

@@ -12,7 +12,6 @@
 <ui:define name="panelHeadingCat">Category</ui:define> 
 	<ui:define name="contentCat">
 
-				
 					<ul class="list-group">
 							<li class="list-group-item">
 							<h:link value="[All Products]" outcome="/product/list.xhtml">
@@ -27,7 +26,7 @@
 
 				</ui:define>
 		<ui:define name="panelHeading">
-			<h3>Login</h3>
+			<h3>Login Admin</h3>
 		</ui:define>
 
 		<ui:define name="content">
@@ -35,17 +34,17 @@
 			<h:form>
 				<div class="form-group">
 					<label for="usr">Email:</label>
-					<h:inputText value="#{loginController.email}" required="true"
+					<h:inputText value="#{loginAdminController.email}" required="true"
 						label="Username" class="form-control" />
 				</div>
 				<div class="form-group">
 					<label for="pwd">Password:</label>
-					<h:inputSecret value="#{loginController.password}"
+					<h:inputSecret value="#{loginAdminController.password}"
 						required="true" redisplay="true" label="kata sandi" class="form-control">
 						<f:validateLength maximum="50" minimum="5" />
 					</h:inputSecret>
 				</div>
-				<h:commandButton action="#{loginController.login}" value="Login"
+				<h:commandButton action="#{loginAdminController.login}" value="Login"
 				 />
 
 			</h:form>
