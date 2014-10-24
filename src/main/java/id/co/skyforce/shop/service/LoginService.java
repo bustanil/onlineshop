@@ -15,6 +15,12 @@ import org.hibernate.Transaction;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
 
+/**
+ * 
+ * @author Saddam Hussein
+ *
+ */
+
 public class LoginService {
 	
 	//String url;

@@ -14,6 +14,12 @@ import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+/**
+ * 
+ * @author Sandy Septiandhy
+ *
+ */
+
 @ManagedBean(name="pc")
 public class ProductController {
 

@@ -8,6 +8,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+/**
+ * 
+ * @author Saddam Hussein
+ *
+ */
 
 @ManagedBean
 public class ProductListController {
