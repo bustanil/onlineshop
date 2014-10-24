@@ -11,6 +11,12 @@ import javax.servlet.http.HttpSession;
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.service.LoginService;
 
+/**
+ * 
+ * @author Saddam Hussein
+ *
+ */
+
 @ManagedBean
 @SessionScoped
 public class LoginController implements Serializable {
@@ -18,6 +24,7 @@ public class LoginController implements Serializable {
 	private String email;
 	private String password;
 	String url;
+	Customer cust = new Customer();
 	
 	public String login(){
 		LoginService ls = new LoginService();
@@ -27,11 +34,11 @@ public class LoginController implements Serializable {
 			          getCurrentInstance().
 			          getExternalContext().
 			          getSession(false);
-			Customer cust = new Customer();
+			cust = new Customer();
 			cust = ls.getCustomer();
             session.setAttribute("lastName", cust.getLastName());
  
-            return url;
+            return "/product/list";
 		}
 		else{
 			FacesContext.getCurrentInstance().addMessage(
@@ -41,6 +48,14 @@ public class LoginController implements Serializable {
                     "Please Try Again!"));
             return "login";
 		}
+	}
+	
+	public boolean isLoggedIn(){
+		if(cust.getFirstName()!=null){
+			return true;	
+		}
+		return false;
+		
 	}
 
 	public String getEmail() {

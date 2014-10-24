@@ -6,6 +6,12 @@ import org.hibernate.Transaction;
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.util.HibernateUtil;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 public class RegisterService {
 	
 	public void register(Customer customer) {

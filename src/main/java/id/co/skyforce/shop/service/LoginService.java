@@ -1,6 +1,5 @@
 package id.co.skyforce.shop.service;
 
-
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.util.HibernateUtil;
@@ -15,6 +14,12 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.sun.xml.internal.messaging.saaj.packaging.mime.util.QEncoderStream;
+
+/**
+ * 
+ * @author Saddam Hussein
+ *
+ */
 
 public class LoginService {
 	
@@ -44,8 +49,10 @@ public class LoginService {
 		return cust;
 	}
 	
-	public void logout(){
-		cust= null;
+	public String logout(){
+		cust= null; 
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	     return "/index";
 	}
 
 }

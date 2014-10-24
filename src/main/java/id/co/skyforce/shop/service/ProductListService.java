@@ -10,7 +10,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
+/**
+ * 
+ * @author Sandy Septiandhy
+ *
+ */
 
 public class ProductListService {
 

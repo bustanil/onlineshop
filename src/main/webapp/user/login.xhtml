@@ -1,17 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>Login</h:head>
 <body>
 
 	<ui:composition template="/template/bootstrap.xhtml">
-	
-			<ui:define name="panelHeading">
+
+		<ui:define name="panelHeading">
 			<h3>Login</h3>
 		</ui:define>
+<<<<<<< HEAD
 		
 				<ui:define name="content">
         <h:form>
@@ -34,8 +35,31 @@
             </table>
         </h:form>
 </ui:define>
+=======
+>>>>>>> branch 'master' of https://github.com/bustanil/onlineshop.git
 
-</ui:composition>
+		<ui:define name="content">
+
+			<h:form>
+				<div class="form-group">
+					<label for="usr">Email:</label>
+					<h:inputText value="#{loginController.email}" required="true"
+						label="Username" class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="pwd">Password:</label>
+					<h:inputSecret value="#{loginController.password}"
+						required="true" redisplay="true" label="kata sandi" class="form-control">
+						<f:validateLength maximum="50" minimum="5" />
+					</h:inputSecret>
+				</div>
+				<h:commandButton action="#{loginController.login}" value="Login"
+				 />
+
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
 
 </body>
 </html>

@@ -2,6 +2,12 @@ package id.co.skyforce.shop.service;
 
 import id.co.skyforce.shop.model.ShoppingCart;
 
+/**
+ * 
+ * @author Irwansyah Hazniel
+ *
+ */
+
 public class ShoppingCartService {
 	
 	public Integer incrementQuantity(ShoppingCart cart) {
