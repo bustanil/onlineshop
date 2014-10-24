@@ -88,9 +88,6 @@ public class ProductController {
 		Category category = (Category) session.get(Category.class, categoryId);
 		Supplier supplier = (Supplier) session.get(Supplier.class, supplierId);
 		
-		trx.commit();
-		session.close();
-		
 		// jika not null, otomatis update
 		product.setId(productId);
 		
@@ -102,30 +99,12 @@ public class ProductController {
 		product.setCategory(category);
 		product.setSupplier(supplier);
 		
-		// jika not null, otomatis update
-//		category.setId(this.categoryId);
+		session.saveOrUpdate(product);
 		
-		// jika not null, otomatis update
-//		supplier.setId(this.supplierId);
-		
-		product.setCategory(category);
-		product.setSupplier(supplier);
-		
-		ProductService proService = new ProductService();
-		proService.saveService(product);
-		
-
-		ExternalContext externalContext = FacesContext.getCurrentInstance()
-				.getExternalContext();
-		try {
-			externalContext.redirect("listproduct");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		trx.commit();
+		session.close();
 		
 		return "listproduct";
-		
-//		return "link kemana?";
 		
 	}
 
