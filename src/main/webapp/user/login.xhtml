@@ -9,35 +9,6 @@
 
 	<ui:composition template="/template/bootstrap.xhtml">
 
-		<ui:define name="panelHeading">
-			<h3>Login</h3>
-		</ui:define>
-<<<<<<< HEAD
-		
-				<ui:define name="content">
-        <h:form>
-            <table>
-                <tr>
-                    <td>Email :</td>
-                    <td><h:inputText value="#{loginController.email}"
-                            required="true" label="Username" /></td>
-                </tr>
-                <tr>
-                    <td>Kata sandi :</td>
-                    <td><h:inputSecret value="#{loginController.password}"
-                            required="true" redisplay="true" label="kata sandi">
-                            <f:validateLength maximum="50" minimum="5" />
-                        </h:inputSecret></td>
-                </tr>
-                <tr>
-                    <td><h:commandButton action="#{loginController.Login}" value="Login" /></td>
-                </tr>
-            </table>
-        </h:form>
-</ui:define>
-=======
->>>>>>> branch 'master' of https://github.com/bustanil/onlineshop.git
-
 		<ui:define name="content">
 
 			<h:form>
