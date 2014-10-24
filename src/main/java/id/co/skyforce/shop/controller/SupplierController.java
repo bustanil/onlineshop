@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import id.co.skyforce.shop.model.Category;
-import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.model.Supplier;
-import id.co.skyforce.shop.service.ProductListService;
 import id.co.skyforce.shop.util.HibernateUtil;
 
 import javax.faces.bean.ManagedBean;

@@ -1,8 +1,6 @@
 package id.co.skyforce.shop.controller;
 
-import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.model.Supplier;
-import id.co.skyforce.shop.service.ProductDetailService;
 import id.co.skyforce.shop.service.SupplierDetailService;
 
 import javax.faces.bean.ManagedBean;
