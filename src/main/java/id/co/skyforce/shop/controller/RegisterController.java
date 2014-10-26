@@ -31,11 +31,14 @@ public class RegisterController {
 	private String street;
 	private String city;
 	private String postalCode;
+	
 	private Long customerId;
 	private Long addressId;
+	
 	private Customer customer = new Customer();
 	
 	public void simpanCustomer(){
+		
 		customer.setFirstName(firstName);
 		customer.setLastName(lastName);
 		customer.setBirthDate(birthDate);
@@ -46,18 +49,23 @@ public class RegisterController {
 		customer.setSalutation(salutation);
 		customer.setGender(gender);
 		customer.setStatus(CustomerStatus.ACTIVE);
+		
 		Address address = new Address();
 		address.setStreet(street);
 		address.setCity(city);
 		address.setPostalCode(postalCode);
+		
+		customer.setAddress(address);
 		
 		newCustomer(customer);
 		
 	}
 	
 	public void newCustomer(Customer customer) {
+		
 		RegisterService regService = new RegisterService();
 		regService.register(customer);
+		
 	}
 
 	public String getEmail() {

@@ -20,6 +20,7 @@ public class RegisterService {
 		Transaction trx = session.beginTransaction();
 		
 		session.save(customer);
+		
 		trx.commit();
 		session.close();
 		
