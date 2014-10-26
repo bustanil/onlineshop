@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/abootstrap.xhtml">
+
+	<ui:define name="panelHeadingCat">Menu</ui:define> 
+	<ui:define name="contentCat">
+
+				
+					<ul class="list-group">
+							<li class="list-group-item">
+							<h:link value="Product" outcome="/admin/listproduct.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Customer" outcome="/admin/listcustomer.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Category" outcome="/admin/listcategory.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Supplier" outcome="/admin/listsupplier.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Payment Method" outcome="/admin/listpayment.xhtml">
+								</h:link></li>
+					</ul>
+
+				</ui:define>
+
+
+		<ui:define name="panelHeading">
+			<h3>Edit Product</h3>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<h:form>
+ <h:inputHidden value="#{productController.productId}" converter="javax.faces.Long" />
+
+
+<div class="form-group">
+<label>Name:</label>
+<h:inputText value="#{productController.name}" class="form-control" required="true"/>
+</div>
+
+
+
+<div class="form-group">
+<h:commandButton action="#{productController.save}" value="Submit" class="form-control"  />
+</div>
+<div class="form-group">
+<h:commandButton action="listcategory" value="Cancel" class="form-control"  />
+</div>
+
+
+</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
