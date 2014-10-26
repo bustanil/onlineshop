@@ -1,10 +1,13 @@
 package id.co.skyforce.shop.controller;
 
+import java.io.IOException;
 import java.util.List;
+
 import id.co.skyforce.shop.model.PaymentMethod;
 import id.co.skyforce.shop.service.PaymentService;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 /**
@@ -54,7 +57,7 @@ public class PaymentController {
 
 	}
 
-	public String delete() {
+	public void delete() {
 
 		String passPaymentId = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap().get("payment_id");
@@ -63,7 +66,13 @@ public class PaymentController {
 		PaymentService payService = new PaymentService();
 		payService.deleteService(this.paymentId);
 
-		return "listpayment";
+		ExternalContext externalContext = FacesContext.getCurrentInstance()
+				.getExternalContext();
+		try {
+			externalContext.redirect("listpayment.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
