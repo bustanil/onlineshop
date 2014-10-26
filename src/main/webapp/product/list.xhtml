@@ -35,8 +35,11 @@
 		<br />
 	        <h:form>
 			
-	           <div class="col-md-8"><h:inputText id="name" value="#{helloBean.name}" class="form-control" /></div>
-	           <div class="col-md-4" ><h:commandButton value="Search" class="form-control" width="50%" /></div>
+	           <div class="col-md-8"><h:inputText id="name" value="#{productController.keyword}" class="form-control" /></div>
+	           <div class="col-md-4" ><h:commandButton value="Search" action="#{productController.searchByName}" 
+	           class="form-control" width="50%" >
+	           <f:ajax execute="name" render=":hasil"/>
+	           </h:commandButton></div>
 
 	        </h:form>
 	        </div>
@@ -45,9 +48,37 @@
 		</ui:define>
 
 		<ui:define name="content">
+		<h:form id="hasil">
 
-
+		
 			<ul class="list-group">
+				<ui:repeat var="p" value="#{productController.products}">
+
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-md-2">No image here</div>
+							<div class="col-md-2">
+								<div class="row">
+									<h:link value="#{p.name}" outcome="/product/detail.xhtml" >
+										<f:param name="id" value="#{p.id}" />
+									</h:link>
+								</div>
+								<div class="row">
+									Price:
+									<h:outputText value="#{p.price} " />
+								</div>
+							</div>
+
+
+						</div>
+				
+
+					</li>
+				</ui:repeat>
+        </ul>
+</h:form>
+<h:panelGroup >
+			<ul class="list-group" >
 				<ui:repeat var="p" value="#{productListController.prd}">
 
 					<li class="list-group-item">
@@ -73,7 +104,7 @@
 				</ui:repeat>
 			</ul>
 
-
+</h:panelGroup>
 
 		</ui:define>
 	</ui:composition>

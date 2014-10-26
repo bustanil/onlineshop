@@ -64,7 +64,7 @@
 							<div class="col-md-1">
 								<h:form>
 									<h:commandLink action="#{productController.delete}"
-										value="Delete">
+										value="Delete" outcome="listproduct">
 										<f:param name="idDelete" value="#{p.id}" />
 									</h:commandLink>
 								</h:form>
