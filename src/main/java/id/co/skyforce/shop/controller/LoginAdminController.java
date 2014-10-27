@@ -2,25 +2,19 @@ package id.co.skyforce.shop.controller;
 
 import java.io.Serializable;
 
+import id.co.skyforce.shop.model.Customer;
+import id.co.skyforce.shop.service.LoginService;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import id.co.skyforce.shop.model.Customer;
-import id.co.skyforce.shop.service.LoginService;
-
-/**
- * 
- * @author Saddam Hussein
- *
- */
 
 @ManagedBean
 @SessionScoped
-public class LoginController implements Serializable {
-
+public class LoginAdminController implements Serializable {
 	private String email;
 	private String password;
 	String url;
@@ -38,7 +32,7 @@ public class LoginController implements Serializable {
 			cust = ls.getCustomer();
             session.setAttribute("lastName", cust.getLastName());
  
-            return "/product/list";
+            return "/admin/list";
 		}
 		else{
 			FacesContext.getCurrentInstance().addMessage(
@@ -80,13 +74,4 @@ public class LoginController implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Customer getCust() {
-		return cust;
-	}
-
-	public void setCust(Customer cust) {
-		this.cust = cust;
-	}
-	
 }

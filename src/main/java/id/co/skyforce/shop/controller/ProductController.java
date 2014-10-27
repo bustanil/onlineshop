@@ -1,26 +1,27 @@
 package id.co.skyforce.shop.controller;
 
-import id.co.skyforce.shop.util.HibernateUtil;
-import id.co.skyforce.shop.model.*;
-
+import id.co.skyforce.shop.model.Category;
+import id.co.skyforce.shop.model.Product;
+import id.co.skyforce.shop.model.Supplier;
+import id.co.skyforce.shop.service.ProductListService;
+import id.co.skyforce.shop.service.ProductService;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 /**
  * 
  * @author Sandy Septiandhy
+ * @author Irwansyah Hazniel
  *
  */
 
-@ManagedBean(name="pc")
+@ManagedBean
 public class ProductController {
 
 	private Long productId;
@@ -28,97 +29,126 @@ public class ProductController {
 	private BigDecimal price;
 	private Integer stock;
 	private String description;
+	private Category category;
+	private Supplier supplier;
 	private Long categoryId;
+	private Long supplierId;
+	private String keyword;
+
+	private List<Product> products;
+	private List<Category> categories;
+	private List<Supplier> suppliers;
 
 	public ProductController() {
-		String idProduct = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap().get("id");
 
-		if(idProduct != null){
-			productId = Long.valueOf(idProduct);
-			Session session = HibernateUtil.openSession();
-			Transaction trx = session.beginTransaction();
-			Product p = (Product) session.get(Product.class, productId);
-			trx.commit();session.close();
+		String passProductId = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap()
+				.get("product_id");
 
-			name = p.getName();
-			price = p.getPrice();
-			stock = p.getStock();
-			description = p.getDescription();
+		ProductService proService = new ProductService();
 
-			categoryId = p.getCategory().getId();
+		if (passProductId != null) {
+
+			productId = Long.valueOf(passProductId);
+
+			Product product = proService.getProduct(productId);
+
+			name = product.getName();
+			price = product.getPrice();
+			stock = product.getStock();
+			description = product.getDescription();
+			categoryId = product.getCategory().getId();
+			supplierId = product.getSupplier().getId();
+
 		}
+
+		categories = proService.getAllCategories();
+		suppliers = proService.getAllSuppliers();
+
 	}
 
-	public void save(){
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-		Category cat = (Category) session.get(Category.class, categoryId);
+	public String searchByName() {
 
-		Product p = new Product();
-		p.setId(productId);
-		p.setName(name);
-		p.setPrice(price);
-		p.setStock(stock);
-		p.setDescription(description);
-		p.setCategory(cat);
-		session.saveOrUpdate(p);
-		trx.commit();
-		session.close();
+		ProductService proService = new ProductService();
+
+		this.products = proService.searchByNameService(this.keyword);
+
+		ProductListController proListController = new ProductListController();
+		proListController.setPrd(null);
 		
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		return "list";
+
+	}
+
+	public String save() {
+
+		ProductService proService = new ProductService();
+
+		Category category = proService.getCategory(this.categoryId);
+		Supplier supplier = proService.getSupplier(this.supplierId);
+		Product product = new Product(this.name, this.price, this.stock,
+				this.description);
+
+		// jika productId not null, update
+		product.setId(this.productId);
+
+		product.setCategory(category);
+		product.setSupplier(supplier);
+
+		proService.saveService(product);
+
+		return "listproduct";
+
+	}
+
+	public void delete() {
+
+		String passProductId = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap().get("idDelete");
+		this.productId = Long.valueOf(passProductId);
+
+		ProductService proService = new ProductService();
+		proService.deleteService(this.productId);
+
+		// update object list, setelah dihapus
+		ProductListService proListService = new ProductListService();
+		List<Product> products = proListService.getAllProduct();
+
+		ProductListController proListController = new ProductListController();
+		proListController.setPrd(products);
+
+		ExternalContext externalContext = FacesContext.getCurrentInstance()
+				.getExternalContext();
 		try {
-			externalContext.redirect("list_product.xhtml");
+			externalContext.redirect("listproduct.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void delete(){
-		
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-		Product p = (Product) session.get(Product.class, productId);
-		session.delete(p);
-		trx.commit();
-		session.close();
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		try {
-			externalContext.redirect("list_product.xhtml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 	}
 
-	public Long getProductId() {
-		return productId;
+	public List<Supplier> getSuppliers() {
+		return suppliers;
 	}
-	public void setProductId(Long productId) {
-		this.productId = productId;
+
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
 	}
-	public String getName() {
-		return name;
+
+	public List<Category> getCategories() {
+		return categories;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
-	public BigDecimal getPrice() {
-		return price;
+
+	public Long getSupplierId() {
+		return supplierId;
 	}
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-	public Integer getStock() {
-		return stock;
-	}
-	public void setStock(Integer stock) {
-		this.stock = stock;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
 	}
 
 	public Long getCategoryId() {
@@ -127,6 +157,78 @@ public class ProductController {
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/abootstrap.xhtml">
+
+		<ui:define name="panelHeadingCat">Menu</ui:define>
+		<ui:define name="contentCat">
+
+
+			<ul class="list-group">
+				<li class="list-group-item"><h:link value="Product"
+						outcome="/admin/listproduct.xhtml">
+					</h:link></li>
+				<li class="list-group-item"><h:link value="Customer"
+						outcome="/admin/listcustomer.xhtml">
+					</h:link></li>
+				<li class="list-group-item"><h:link value="Category"
+						outcome="/admin/listcategory.xhtml">
+					</h:link></li>
+				<li class="list-group-item"><h:link value="Supplier"
+						outcome="/admin/listsupplier.xhtml">
+					</h:link></li>
+				<li class="list-group-item"><h:link value="Payment Method"
+						outcome="/admin/listpayment.xhtml">
+					</h:link></li>
+			</ul>
+
+		</ui:define>
+
+
+		<ui:define name="panelHeading">
+			<h3>List Payment Admin Mode</h3>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<ul class="list-group">
+				<ui:repeat var="p" value="#{paymentListController.payMethod}">
+
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-md-2">No image here</div>
+							<div class="col-md-2">
+								<div class="row">
+									Price:
+									<h:outputText value="#{p.name} " />
+								</div>
+							</div>
+							<div class="col-md-1">
+								<h:link value="Edit" outcome="formpayment">
+									<f:param name="payment_id" value="#{p.id}" />
+								</h:link>
+							</div>
+
+							<div class="col-md-1">
+								<h:form>
+									<h:commandLink action="#{paymentController.delete}"
+										value="Delete" outcome="listpayment">
+										<f:param name="payment_id" value="#{p.id}" />
+									</h:commandLink>
+								</h:form>
+							</div>
+
+						</div>
+					</li>
+				</ui:repeat>
+			</ul>
+			<h:link value="Add new payment" outcome="formpayment" />
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

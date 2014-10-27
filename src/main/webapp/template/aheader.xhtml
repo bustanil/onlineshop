@@ -21,22 +21,19 @@
 			</div>
 			<div class="navbar-collapse collapse" >
 				<ul class="nav navbar-nav navbar-right" >
-					<h:panelGroup rendered="#{loginController.loggedIn}">
+					<h:panelGroup rendered="#{loginAdminController.loggedIn}">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">My Account <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li>
-								<h:link outcome="/user/update" >
-								<span class="glyphicon glyphicon-user" style="padding-right: 5px"></span>
-								Edit Profile
-										<f:param name="idcustomer" value="#{loginController.cust.id}" />
-								</h:link></li>
-								<li><a href=""><span class="glyphicon glyphicon-list-alt"
-										style="padding-right: 5px" ></span>Transaction History</a></li>
+								<li><a href=""><span class="glyphicon glyphicon-user"
+										style="padding-right: 5px"></span>Edit Profile</a></li>
+								<li><a href="#"><span
+										class="glyphicon glyphicon-list-alt"
+										style="padding-right: 5px"></span>Transaction History</a></li>
 								<li class="divider"></li>
 								<li>
 									<h:form style="margin-left: 20px">
-									<h:commandLink action="#{loginController.logout}">
+									<h:commandLink action="#{loginAdminController.logout}">
 										<span class="glyphicon glyphicon-log-out"
 											style="padding-right: 5px"> </span>Logout
 									</h:commandLink>
@@ -46,8 +43,8 @@
 						</li>
 					</h:panelGroup>
 					<li><a><span class="glyphicon glyphicon-shopping-cart">(<span id="shoppingCartSize">0</span>)</span></a></li>
-					<li><h:link value="Login"  outcome="/user/login.xhtml" rendered="#{not loginController.loggedIn}" /></li>
-					<li><h:link value="Register" outcome="/user/register.xhtml" rendered="#{not loginController.loggedIn}" /></li>
+					<li><h:link value="Login"  outcome="/user/login.xhtml" rendered="#{not loginAdminController.loggedIn}" /></li>
+					<li><h:link value="Register" outcome="/user/register.xhtml" rendered="#{not loginAdminController.loggedIn}" /></li>
 					
 
 				</ul>

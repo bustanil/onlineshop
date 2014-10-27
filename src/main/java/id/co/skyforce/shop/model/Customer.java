@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +27,10 @@ public class Customer {
 	
 	@Column(name = "salutation", length = 10, nullable = false)
 	private String salutation;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status" , length = 10, nullable = false)
+	private CustomerStatus status;
 	
 	@Column(name = "email", length = 50, nullable = false)
 	private String email;
@@ -73,6 +79,14 @@ public class Customer {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public CustomerStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CustomerStatus active) {
+		this.status = active;
 	}
 
 	public Date getBirthDate() {

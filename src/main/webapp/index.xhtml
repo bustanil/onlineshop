@@ -6,10 +6,54 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:composition template="/template/bootstrap.xhtml">
 
+	<ui:define name="panelHeadingCat">Category</ui:define> 
+	<ui:define name="contentCat">
+
+				
+					<ul class="list-group">
+							<li class="list-group-item">
+							<h:link value="[All Products]" outcome="/product/list.xhtml">
+								</h:link></li>
+						<ui:repeat var="c" value="#{shopController.allCategories}">
+							<li class="list-group-item">
+							<h:link value="#{c.name}" outcome="/product/list.xhtml">
+									<f:param name="id" value="#{c.id}" />
+								</h:link></li>
+						</ui:repeat>
+					</ul>
+
+				</ui:define>
+	
+	<ui:define name="panelHeading">
+			<h3>Product List</h3>
+		</ui:define>
 	<ui:define name="content">
 
-		<h3>#{dummyController.message}</h3>
-		<h1>dsfsdfsdfdf</h1>
+			<ul class="list-group">
+				<ui:repeat var="p" value="#{productListController.prd}">
+
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-md-2">No image here</div>
+							<div class="col-md-2">
+								<div class="row">
+									<h:link value="#{p.name}" outcome="/product/detail.xhtml" >
+										<f:param name="id" value="#{p.id}" />
+									</h:link>
+								</div>
+								<div class="row">
+									Price:
+									<h:outputText value="#{p.price} " />
+								</div>
+							</div>
+
+
+						</div>
+				
+
+					</li>
+				</ui:repeat>
+			</ul>
 	</ui:define>
 
 </ui:composition>

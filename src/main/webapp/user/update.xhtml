@@ -7,25 +7,9 @@
 
 <body>
 	<ui:composition template="/template/bootstrap.xhtml">
-	<ui:define name="panelHeadingCat">Category</ui:define> 
-		<ui:define name="contentCat">
-
-				
-					<ul class="list-group">
-							<li class="list-group-item">
-							<h:link value="[All Products]" outcome="/product/list.xhtml">
-								</h:link></li>
-						<ui:repeat var="c" value="#{shopController.allCategories}">
-							<li class="list-group-item">
-							<h:link value="#{c.name}" outcome="/product/list.xhtml">
-									<f:param name="id" value="#{c.id}" />
-								</h:link></li>
-						</ui:repeat>
-					</ul>
-
-				</ui:define>
+	
 			<ui:define name="panelHeading">
-			<h3>Register</h3>
+			<h3>Update Customer</h3>
 		</ui:define>
 		
 				<ui:define name="content">
@@ -36,7 +20,7 @@
 			
 				<div class="form-group">
 					<label for="usr">Salutation:</label> 
-					<h:selectOneMenu value="#{registerController.salutation}" class="form-control">
+					<h:selectOneMenu value="#{updateCustomerController.salutation}" class="form-control">
 							<f:selectItem itemValue="Mr" itemLabel="Mr" />
 							<f:selectItem itemValue="Mrs" itemLabel="Mrs" />
 							<f:selectItem itemValue="Ms" itemLabel="Ms" />
@@ -44,19 +28,19 @@
 				</div>
 				<div class="form-group">
 					<label for="usr">Nama Depan:</label>
-					 <h:inputText value="#{registerController.firstName}"
+					 <h:inputText value="#{updateCustomerController.firstName}"
 							required="true" label="Nama Depan" class="form-control"/>
 				</div>
 
 				<div class="form-group">
 					<label for="usr">Nama Belakang:</label> 
-					<h:inputText value="#{registerController.lastName}"
+					<h:inputText value="#{updateCustomerController.lastName}"
 							required="true" label="Nama Belakang" class="form-control"/>
 				</div>
 				
 				<div class="form-group">
 					<label for="usr">Jenis Kelamin:</label> 
-					<h:selectOneRadio value="#{registerController.gender}" class="form-control">
+					<h:selectOneRadio value="#{updateCustomerController.gender}" class="form-control">
 							<f:selectItem itemValue="P" itemLabel="Pria" />
 							<f:selectItem itemValue="W" itemLabel="Wanita" />
 						</h:selectOneRadio>
@@ -64,7 +48,7 @@
 				
 				<div class="form-group">
 					<label for="usr">Email:</label> 
-					<h:inputText value="#{registerController.email}"
+					<h:inputText value="#{updateCustomerController.email}"
 							required="true" label="Email" class="form-control">
 							<f:validateRegex
 								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -73,50 +57,49 @@
 
 				<div class="form-group">
 					<label for="usr">Telp Rumah :</label> 
-					<h:inputText value="#{registerController.homePhone}" 
+					<h:inputText value="#{updateCustomerController.homePhone}" 
 					required="true" label="Telp Rumah" class="form-control"/>
 				</div>
 				
 				<div class="form-group">
 					<label for="usr">Hp:</label> 
-					<h:inputText value="#{registerController.mobileNo}"
+					<h:inputText value="#{updateCustomerController.mobileNo}"
 							required="true" label="Telp Genggam" class="form-control"/>
 				</div>
 				
-				<div class="form-group">
-					<label for="usr">Kata sandi:</label> 
-					<h:inputSecret value="#{registerController.password}"
-							required="true" redisplay="true" label="kata sandi" class="form-control">
-							<f:validateLength maximum="50" minimum="5" />
-						</h:inputSecret>
-				</div>
 
 				<div class="form-group">
 					<label for="usr">Tanggal Lahir:</label> 
-					<h:inputText value="#{registerController.birthDate}" class="form-control">
+					<h:inputText value="#{updateCustomerController.birthDate}" class="form-control">
 							<f:convertDateTime pattern="dd-MM-yyyy" />
 						</h:inputText>
 				</div>
 				
 				<div class="form-group">
 					<label for="usr">Alamat:</label> 
-					<h:inputText value="#{registerController.street}"
+					<h:inputText value="#{updateCustomerController.street}"
 							required="true" label="jalan"  class="form-control" />
 				</div>
 				
 				<div class="form-group">
 					<label for="usr">Kota:</label> 
-					<h:inputText value="#{registerController.city}"
+					<h:inputText value="#{updateCustomerController.city}"
 							required="true" label="kota" class="form-control" />
 				</div>
 				
 				<div class="form-group">
 					<label for="usr">Kode Pos:</label> 
-					<h:inputText value="#{registerController.postalCode}"
+					<h:inputText value="#{updateCustomerController.postalCode}"
 							required="true" label="kode pos" class="form-control"/>
 				</div>
 				
-				<h:commandButton action="#{registerController.simpanCustomer}" value="Kirim" />
+				<div class="form-group">
+					<label for="usr">Validasi Kata sandi:</label> 
+					<h:inputSecret value="#{updateCustomerController.password}"
+							required="true" redisplay="true" label="kata sandi" class="form-control" />
+							
+				</div>
+				<h:commandButton action="#{updateCustomerController.updateCustomer}" value="Update" />
 
 			</h:form>
 		

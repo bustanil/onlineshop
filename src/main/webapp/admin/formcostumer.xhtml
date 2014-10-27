@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<h:head></h:head>
+<body>
+	<ui:composition template="/template/abootstrap.xhtml">
+
+	<ui:define name="panelHeadingCat">Menu</ui:define> 
+	<ui:define name="contentCat">
+
+				
+					<ul class="list-group">
+							<li class="list-group-item">
+							<h:link value="Product" outcome="/admin/listproduct.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Customer" outcome="/admin/listcustomer.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Category" outcome="/admin/listcategory.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Supplier" outcome="/admin/listsupplier.xhtml">
+								</h:link></li>
+								<li class="list-group-item">
+							<h:link value="Payment Method" outcome="/admin/listpayment.xhtml">
+								</h:link></li>
+						
+					</ul>
+
+				</ui:define>
+
+
+		<ui:define name="panelHeading">
+			<h3>Edit Customer</h3>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<h:form>
+
+<!-- <h:inputHidden value="zx" converter="javax.faces.Long" />
+<h:inputHidden value="zx" converter="javax.faces.Long" /> -->
+
+<div class="form-group">
+<label>Salutation:</label>
+<h:selectOneMenu value="#{customerController.salutation}"  class="form-control" >
+							<f:selectItem itemValue="Mr" itemLabel="Mr" />
+							<f:selectItem itemValue="Mrs" itemLabel="Mrs" />
+							<f:selectItem itemValue="Ms" itemLabel="Ms" />
+						</h:selectOneMenu>
+</div>
+<div class="form-group">
+<label>First Name:</label>
+<h:inputText value="firstname" class="form-control" required="true"/>
+</div>
+
+<div class="form-group">
+<label>Last Name:</label>
+<h:inputText value="lastname" class="form-control" required="true"/>
+</div>
+
+<div class="form-group">
+<label>Gender:</label>
+<h:selectOneRadio value="#{customerController.gender}"  class="form-control">
+							<f:selectItem itemValue="P" itemLabel="Pria"  class="form-control"/>
+							<f:selectItem itemValue="W" itemLabel="Wanita"  class="form-control"/>
+						</h:selectOneRadio>
+</div>
+
+<div class="form-group">
+<label >Stock:</label>
+<h:inputText value="stock" class="form-control" />
+</div>
+
+<div class="form-group">
+<label >Description:</label>
+<h:inputText value="description" class="form-control" />
+</div>
+
+<div class="form-group">
+<label >Supplier:</label>
+<h:selectOneMenu value="supplier id" class="form-control" >
+<!-- 	<f:selectItems var="s" value="list supplier" itemValue="#{1}" itemLabel="#{bla}"/> -->
+
+</h:selectOneMenu>
+</div>
+
+<div class="form-group">
+<h:commandButton action="save" value="Submit" class="form-control"  />
+</div>
+<div class="form-group">
+<h:commandButton action="listproduct" value="Cancel" class="form-control"  />
+</div>
+
+
+</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
