@@ -68,8 +68,6 @@ public class SupplierController {
 		
 		supplier.setId(this.supplierId);
 		
-		supplier.setCategory(category);
-		
 		suppService.saveService(supplier);
 		
 		return "listsupplier";
