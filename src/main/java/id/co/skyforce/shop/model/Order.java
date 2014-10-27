@@ -1,4 +1,4 @@
-package id.co.skyforce.shop.model;
+ package id.co.skyforce.shop.model;
 
 import java.math.BigDecimal;
 import java.util.Date;

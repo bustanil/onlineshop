@@ -21,16 +21,28 @@ public class OrderDetail implements Serializable {
 	@Column(name="id", nullable=false)
 	private Long id;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="order_id")
+	private Order order;
+	
 	@Column(name="quantity", nullable=false)
 	private Integer quantity;
 	
 	@Column(name = "price", nullable = false, precision = 18, scale = 2)
 	private BigDecimal price;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
 	public Long getId() {
 		return id;
