@@ -1,14 +1,18 @@
 package id.co.skyforce.shop.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 
 
+
+import javax.servlet.http.HttpServletResponse;
 
 import id.co.skyforce.shop.model.Address;
 import id.co.skyforce.shop.model.Customer;
@@ -46,6 +50,16 @@ public class UpdateCustomerController {
 	public UpdateCustomerController(){
 		String IdCustomer=  FacesContext.getCurrentInstance().
 				getExternalContext().getRequestParameterMap().get("idcustomer");
+//		if (IdCustomer == null){
+//			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//			
+//			try {
+//				
+//				externalContext.redirect("login.xhtml");
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		customerId = Long.valueOf(IdCustomer);
 		UpdateCustomerService ucs = new UpdateCustomerService();
 		customer = ucs.getCustomer(customerId);

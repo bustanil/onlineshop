@@ -43,8 +43,7 @@
 				<div class="form-group">
 					<label for="pwd">Password:</label>
 					<h:inputSecret value="#{loginController.password}"
-						required="true" redisplay="true" label="kata sandi" class="form-control">
-						<f:validateLength maximum="50" minimum="5" />
+						required="true" redisplay="true" label="Password" class="form-control">
 					</h:inputSecret>
 				</div>
 				<h:commandButton action="#{loginController.login}" value="Login"
