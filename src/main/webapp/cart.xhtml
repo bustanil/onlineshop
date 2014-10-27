@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
 <h:head></h:head>
@@ -54,7 +55,7 @@
 				</div>
 				</li>
 				<li class="list-group-item">
-				<ui:repeat var="p" value="#{shoppingCartController.items}">
+<!-- 				<ui:repeat var="p" value="#{shoppingCartController.items}">
 					<div class="row">
 
 						<div class="col-md-3">
@@ -68,7 +69,23 @@
 						<div class="col-md-2">Sub Total</div>
 
 					</div>
-				</ui:repeat>
+				</ui:repeat> -->
+
+				<c:forEach var="p" items="#{shoppingCartController.items}">
+					<div class="row">
+
+						<div class="col-md-3">
+							<h:link value="#{p.key.name}" outcome="/product/detail.xhtml">
+							</h:link>
+						</div>
+						<div class="col-md-3">
+							<h:outputText value="#{p.key.price} " />
+						</div>
+						<div class="col-md-2"><h:outputText value="#{p.value} " /></div>
+						<div class="col-md-2">Sub Total</div>
+
+					</div>
+					</c:forEach>
 				<div class="row">
 					<div class="col-md-3"/>
 					<div class="col-md-3"/>
