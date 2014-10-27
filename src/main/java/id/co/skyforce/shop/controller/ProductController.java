@@ -75,7 +75,7 @@ public class ProductController {
 
 		ProductListController proListController = new ProductListController();
 		proListController.setPrd(null);
-		
+
 		return "list";
 
 	}
