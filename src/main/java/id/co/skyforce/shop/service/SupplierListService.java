@@ -9,11 +9,13 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 /**
  * 
  * @author Wirahman
  *
  */
+
 public class SupplierListService {
 
 	public List getSupplierByCategory(Long categoryId){
@@ -31,6 +33,7 @@ public class SupplierListService {
 	public SupplierListService(){
 		
 	}
+	
 	public List getAllSupplier(){
 		List <Supplier> supp;
 		Session session = HibernateUtil.openSession();
@@ -45,4 +48,5 @@ public class SupplierListService {
 		session.close();
 		return supp;
 	}
+	
 }
