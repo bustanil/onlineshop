@@ -6,6 +6,7 @@ import id.co.skyforce.shop.service.ProductListService;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -15,6 +16,7 @@ import javax.faces.context.FacesContext;
  */
 
 @ManagedBean
+@SessionScoped
 public class ProductListController {
 
 	private List <Product> prd;

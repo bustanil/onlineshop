@@ -50,10 +50,8 @@
 				<h:outputText value="#{productDetailController.product.description}" />
 				<br />
 
-
-				<h:commandButton type="submit" value="Add To Cart"
-					action="#{shoppingCartController.incrementTotalItem}">
-					<f:ajax render=":hasil1" />
+				<h:commandButton type="submit" value="Add To Cart">
+					<f:ajax render=":hasil1" listener="#{productDetailController.tambahProduct}"/>
 				</h:commandButton>
 			</h:form>
 		</ui:define>
