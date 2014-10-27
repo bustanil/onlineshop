@@ -1,20 +1,18 @@
 package id.co.skyforce.shop.controller;
 
 import java.io.IOException;
-import java.util.Set;
+import java.math.BigDecimal;
+import java.util.List;
 
 import id.co.skyforce.shop.model.Category;
-import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.model.Supplier;
-import id.co.skyforce.shop.service.ProductListService;
-import id.co.skyforce.shop.util.HibernateUtil;
+import id.co.skyforce.shop.service.SupplierListService;
+import id.co.skyforce.shop.service.SupplierService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 /**
  * 
  * @author Wirahman
@@ -22,98 +20,172 @@ import org.hibernate.Transaction;
  */
 @ManagedBean
 public class SupplierController {
-	private Long supplierId;
+	
 	private String name;
-	private Long category_id;
-		
+	private Long categoryId;
+	private Long supplierId;
+	
+	private List<Supplier> suppliers;
+	private List<Category> categories;
+	private String keyword;
+
 	public SupplierController(){
 		String idSupplier = FacesContext.getCurrentInstance()
 				.getExternalContext().getRequestParameterMap().get("id");
+		SupplierService suppService = new SupplierService();
 		
 		if(idSupplier != null){
 			supplierId = Long.valueOf(idSupplier);
-			Session session = HibernateUtil.openSession();
-			Transaction trx = session.beginTransaction();
-			Supplier s = (Supplier) session.get(Supplier.class, supplierId);
-			trx.commit();
-			session.close();
 			
-			name = s.getName();
-			category_id = s.getCategory().getId();
+			Supplier supplier = suppService.getSupplier(supplierId);
+			
+			name = supplier.getName();
+			categoryId = supplier.getCategory().getId();
+			
 		}
 	}
-	public void TambahSup(){	
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-		Category cat = (Category) session.get(Category.class, category_id);
+
+	public String searchByName(){
+		SupplierService suppService = new SupplierService();
 		
-		Supplier s = new Supplier();
-		s.setId(supplierId);
-		s.setName(name);
-		s.setCategories((Set<Category>) cat);
-		session.saveOrUpdate(s);
-		trx.commit();
-		session.close();
+		this.suppliers = suppService.searchByNameService(this.keyword);
 		
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		try{
-			externalContext.redirect("list_Supplier.xhtml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		SupplierListController suppListController = new SupplierListController();
+		suppListController.setSupplier(null);
+		
+		return "list";
+	}
+
+	public String TambahSup(){	
+
+		SupplierService suppService = new SupplierService();
+		
+		Category category = suppService.getCategory(this.categoryId);
+		Supplier supplier = new Supplier();
+		supplier.setName(name);
+		
+		//Mengubah supplierId jika tidak ada isinya(null) tetapi akan memasukkan supplierId yang baru jika supplierId tersebut belum ada
+		
+		supplier.setId(this.supplierId);
+		
+		supplier.setCategory(category);
+		
+		suppService.saveService(supplier);
+		
+		return "listsupplier";
+		
 	}
 	
+
 	public void DeleteSup(){
-		Session session = HibernateUtil.openSession();
-		Transaction trx = session.beginTransaction();
-		Supplier s = (Supplier) session.get(Supplier.class, supplierId);
-		session.delete(s);
-		trx.commit();
-		session.close();
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+		String SupplierId = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap().get("idDelete");
+		this.supplierId = Long.valueOf(SupplierId);
+		
+		SupplierService suppService = new SupplierService();
+		suppService.deleteService(this.supplierId);
+		
+		//update object list setelah dihapus
+		SupplierListService suppListService = new SupplierListService();
+		List<Supplier> suppliers = suppListService.getAllSupplier();
+		
+		SupplierListController suppListController = new SupplierListController();
+		suppListController.setSupplier(suppliers);
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance()
+				.getExternalContext();
 		try {
-			externalContext.redirect("list_supplier.xhtml");
-		} catch (IOException e) {
+			externalContext.redirect("listsupplier.xhtml");
+		} catch (IOException e){
 			e.printStackTrace();
 		}
-	}
-	
-	
+		}
+
 	/**
 	 * @return the supplierId
 	 */
 	public Long getSupplierId() {
 		return supplierId;
 	}
+
 	/**
 	 * @param supplierId the supplierId to set
 	 */
 	public void setSupplierId(Long supplierId) {
 		this.supplierId = supplierId;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
-	 * @return the category_id
+	 * @return the categoryId
 	 */
-	public Long getCategory_id() {
-		return category_id;
+	public Long getCategoryId() {
+		return categoryId;
 	}
+
 	/**
-	 * @param category_id the category_id to set
+	 * @param categoryId the categoryId to set
 	 */
-	public void setCategory_id(Long category_id) {
-		this.category_id = category_id;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
+
+	/**
+	 * @return the suppliers
+	 */
+	public List<Supplier> getSuppliers() {
+		return suppliers;
+	}
+
+	/**
+	 * @param suppliers the suppliers to set
+	 */
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
+	}
+
+	/**
+	 * @return the categories
+	 */
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	/**
+	 * @param categories the categories to set
+	 */
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+	/**
+	 * @return the keyword
+	 */
+	public String getKeyword() {
+		return keyword;
+	}
+
+	/**
+	 * @param keyword the keyword to set
+	 */
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
+
 	
 }
