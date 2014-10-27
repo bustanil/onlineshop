@@ -1,10 +1,12 @@
 package id.co.skyforce.shop.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -21,48 +23,59 @@ import id.co.skyforce.shop.service.LoginService;
 @SessionScoped
 public class LoginController implements Serializable {
 
+	public static String AUTH_KEY = "app.user.name";
+	
 	private String email;
 	private String password;
 	String url;
 	Customer cust = new Customer();
 	
+	public LoginController(){
+		String IdCustomer=  FacesContext.getCurrentInstance().
+				getExternalContext().getRequestParameterMap().get("idcustomer");
+		if (IdCustomer!=null){
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		
+		try {
+			
+			externalContext.redirect("/product/list.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	}
+
 	public String login(){
 		LoginService ls = new LoginService();
 		boolean result = ls.login(email, password);
 		if (result){
-			HttpSession session = (HttpSession) FacesContext.
-			          getCurrentInstance().
-			          getExternalContext().
-			          getSession(false);
+			 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(AUTH_KEY, email);
 			cust = new Customer();
 			cust = ls.getCustomer();
-            session.setAttribute("lastName", cust.getLastName());
- 
-            return "/product/list";
+			return "/product/list";
 		}
 		else{
 			FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Invalid Login!",
-                    "Please Try Again!"));
-            return "login";
+					null, new FacesMessage
+					(FacesMessage.SEVERITY_WARN,
+							"Invalid Email Or Password! Please Try Again",
+							"Please Try Again!"));
+			return "login";
 		}
 	}
-	
+
 	public String logout(){
-		cust = new Customer();
-		
-		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		LoginService ls = new LoginService();
+		ls.logout();
+		cust = null;
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(AUTH_KEY);
 		return "/product/list"; 
 	}
-	
+
 	public boolean isLoggedIn(){
-		if(cust.getFirstName()!=null){
-			return true;	
-		}
-		return false;
-		
+		return FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get(AUTH_KEY) != null;
+
 	}
 
 	public String getEmail() {
@@ -88,5 +101,5 @@ public class LoginController implements Serializable {
 	public void setCust(Customer cust) {
 		this.cust = cust;
 	}
-	
+
 }
