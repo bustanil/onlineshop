@@ -54,18 +54,17 @@
 				</div>
 				</li>
 				<li class="list-group-item">
-				<ui:repeat var="p" value="#{productListController.prd}">
+				<ui:repeat var="p" value="#{shoppingCartController.items}">
 					<div class="row">
 
 						<div class="col-md-3">
-							<h:link value="#{p.name}" outcome="/product/detail.xhtml">
-								<f:param name="id" value="#{p.id}" />
+							<h:link value="#{p.key.name}" outcome="/product/detail.xhtml">
 							</h:link>
 						</div>
 						<div class="col-md-3">
-							<h:outputText value="#{p.price} " />
+							<h:outputText value="#{p.key.price} " />
 						</div>
-						<div class="col-md-2"><h:outputText value="#{p.stock} " /></div>
+						<div class="col-md-2"><h:outputText value="#{p.value} " /></div>
 						<div class="col-md-2">Sub Total</div>
 
 					</div>

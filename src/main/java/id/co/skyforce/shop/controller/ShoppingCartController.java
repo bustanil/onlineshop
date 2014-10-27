@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -37,6 +39,10 @@ public class ShoppingCartController implements Serializable {
 		
 		totalItem += 1;
 		
+	}
+	
+	public Set<Entry<Product, Long>> getItems(){
+		return productsAndQuantity.entrySet();
 	}
 	
 	public void addProduct(Product product) {
