@@ -33,10 +33,10 @@ public class ShoppingCartController implements Serializable {
 	
 	private Product product;
 	private Map<Product, Long> productsAndQuantity = new HashMap<>();
-	private Map<Product, BigDecimal> productsAndPrice  = new HashMap<>();
 	
 	public void incrementTotalItem() {
 		totalItem += 1;
+		calculateTotalAmount();
 	}
 	
 	public Set<Entry<Product, Long>> getItems(){
@@ -51,21 +51,12 @@ public class ShoppingCartController implements Serializable {
 		// add product to map product
 		productsAndQuantity.put(product, incrementQuantity + 1);
 		
-		for(Entry<Product, Long> e : productsAndQuantity.entrySet()) {
-			System.out.println("Prouduct = " + e.getKey().getName() + 
-					" - Kuantitas = " + e.getValue());
-		}
-		
 	}
 	
-	public String calculateTotalAmount() {
+	public void calculateTotalAmount() {
 		
 		ShoppingCartService cartService = new ShoppingCartService();
 		totalAmount = cartService.totalAmountService(productsAndQuantity);
-		
-		System.out.println(totalAmount);
-		
-		return "checkout";
 		
 	}
 	
@@ -107,14 +98,6 @@ public class ShoppingCartController implements Serializable {
 
 	public void setProductsAndQuantity(Map<Product, Long> productsAndQuantity) {
 		this.productsAndQuantity = productsAndQuantity;
-	}
-
-	public Map<Product, BigDecimal> getProductsAndPrice() {
-		return productsAndPrice;
-	}
-
-	public void setProductsAndPrice(Map<Product, BigDecimal> productsAndPrice) {
-		this.productsAndPrice = productsAndPrice;
 	}
 
 	public BigDecimal getTotalAmount() {
