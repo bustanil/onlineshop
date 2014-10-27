@@ -2,18 +2,15 @@ package id.co.skyforce.shop.controller;
 
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.model.Product;
-import id.co.skyforce.shop.service.ProductDetailService;
 import id.co.skyforce.shop.service.ShoppingCartService;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 
 /**
  * 
@@ -23,9 +20,9 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class ShoppingCartController {
+public class ShoppingCartController implements Serializable {
 	
-//	private Integer totalItem = 0;
+	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
 	
@@ -33,33 +30,16 @@ public class ShoppingCartController {
 	private Customer customer;
 	
 	private Product product;
-	private Map<Product, Long> productsAndQuantity;
-	private Map<Product, BigDecimal> productsAndPrice;
+	private Map<Product, Long> productsAndQuantity = new HashMap<>();
+	private Map<Product, BigDecimal> productsAndPrice  = new HashMap<>();
 	
-//	public void incrementTotalItem() {
+	public void incrementTotalItem() {
 		
-//		totalItem += 1;
+		totalItem += 1;
 		
-//		productId = Long.parseLong(FacesContext.getCurrentInstance()
-//				.getExternalContext().getRequestParameterMap().get("id"));
-		
-//		ProductDetailService detailService = new ProductDetailService();
-//		product = detailService.getDetailProduct(productId);
-		
-		// check apakah product sudah ada di map
-//		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
-		
-		// add product to to map product
-//		productsAndQuantity.put(product, incrementQuantity + 1);
-		
-		// tidak perlu di-direct ke page lain, karena sudah menggunakan AJAX
-		// sehingga perubahan langsung diterapkan
-		
-//		return "list?faces-redirect=true";
-		
-//	}
+	}
 	
-	public void addProduct() {
+	public void addProduct(Product product) {
 		
 		// check apakah product sudah ada di map
 		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
@@ -78,13 +58,13 @@ public class ShoppingCartController {
 		
 	}
 	
-//	public Integer getTotalItem() {
-//		return totalItem;
-//	}
-//	
-//	public void setTotalItem(Integer totalItem) {
-//		this.totalItem = totalItem;
-//	}
+	public Integer getTotalItem() {
+		return totalItem;
+	}
+	
+	public void setTotalItem(Integer totalItem) {
+		this.totalItem = totalItem;
+	}
 
 	public Customer getCustomer() {
 		return customer;

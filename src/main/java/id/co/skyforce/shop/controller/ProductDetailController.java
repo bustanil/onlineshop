@@ -3,9 +3,15 @@ package id.co.skyforce.shop.controller;
 import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.service.ProductDetailService;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+
+import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 
 /**
  * 
@@ -14,11 +20,15 @@ import javax.faces.context.FacesContext;
  */
 
 @ManagedBean
-public class ProductDetailController {
+@SessionScoped
+public class ProductDetailController implements Serializable {
 	
 	private Long productId;
 	private Product product;
-	private Integer totalItem = 0;
+//	private Integer totalItem = 0;
+	
+	@ManagedProperty(value="#{shoppingCartController}")
+	private ShoppingCartController cartController;
 
 	public ProductDetailController() {
 		
@@ -28,31 +38,28 @@ public class ProductDetailController {
 		ProductDetailService detailService = new ProductDetailService();
 		product = detailService.getDetailProduct(productId);
 		
+//		cartController.setProductId(productId);
+//		cartController.addProduct(product);
+		
 	}
 	
-	public void incrementTotalItem() {
+	public void tambahProduct(AjaxBehaviorEvent a) {
 		
-		totalItem += 1;
-		
-		ShoppingCartController cartController = new ShoppingCartController();
-		
+		cartController.addProduct(product);
+		cartController.incrementTotalItem();
+	
+	}
+	
+//	public void incrementTotalItem() {
+//		
+//		totalItem += 1;
+//		
 //		ProductDetailService detailService = new ProductDetailService();
 //		product = detailService.getDetailProduct(productId);
-		
-		cartController.setProduct(product);
-		
-		cartController.addProduct();
-		
-		// check apakah product sudah ada di map
-//		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
-		
-		// add product to to map product
-//		productsAndQuantity.put(product, incrementQuantity + 1);
-		
-		// tidak perlu di-direct ke page lain, karena sudah menggunakan AJAX
-		// sehingga perubahan langsung diterapkan
-		
-	}
+//		
+//		cartController.addProduct(product);
+//		
+//	}
 
 	public Product getProduct() {
 		return product;
@@ -70,12 +77,20 @@ public class ProductDetailController {
 		this.productId = productId;
 	}
 
-	public Integer getTotalItem() {
-		return totalItem;
+//	public Integer getTotalItem() {
+//		return totalItem;
+//	}
+//
+//	public void setTotalItem(Integer totalItem) {
+//		this.totalItem = totalItem;
+//	}
+
+	public ShoppingCartController getCartController() {
+		return cartController;
 	}
 
-	public void setTotalItem(Integer totalItem) {
-		this.totalItem = totalItem;
+	public void setCartController(ShoppingCartController cartController) {
+		this.cartController = cartController;
 	}
 	
 }
