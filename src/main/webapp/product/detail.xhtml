@@ -7,6 +7,24 @@
 <h:head></h:head>
 <body>
 	<ui:composition template="/template/bootstrap.xhtml">
+		<ui:define name="panelHeadingCat">Category</ui:define>
+		<ui:define name="contentCat">
+
+
+			<ul class="list-group">
+				<li class="list-group-item"><h:link value="[All Products]"
+						outcome="/product/list.xhtml">
+					</h:link></li>
+				<ui:repeat var="c" value="#{shopController.allCategories}">
+					<li class="list-group-item"><h:link value="#{c.name}"
+							outcome="/product/list.xhtml">
+							<f:param name="id" value="#{c.id}" />
+						</h:link></li>
+				</ui:repeat>
+			</ul>
+
+		</ui:define>
+
 		<ui:define name="panelHeading">
 			<h3>
 				<h:outputText value="#{productDetailController.product.name}" />
@@ -14,21 +32,30 @@
 		</ui:define>
 		<ui:define name="content">
 
-		<h:form>
+			<h:form>
 
-		<h4><h:outputText value="Price" /></h4>
-		<h:outputText value="#{productDetailController.product.price}" />
-		<br />
-		<h4><h:outputText value="Stock" /></h4>
-		<h:outputText value="#{productDetailController.product.stock}" />
-		<br />
-		<h4><h:outputText value="Description" /></h4>
-		<h:outputText value="#{productDetailController.product.description}" />
-		<br />
+				<h4>
+					<h:outputText value="Price" />
+				</h4>
+				<h:outputText value="#{productDetailController.product.price}" />
+				<br />
+				<h4>
+					<h:outputText value="Stock" />
+				</h4>
+				<h:outputText value="#{productDetailController.product.stock}" />
+				<br />
+				<h4>
+					<h:outputText value="Description" />
+				</h4>
+				<h:outputText value="#{productDetailController.product.description}" />
+				<br />
 
-		
-		<h:commandButton type="submit" value="Add To Cart" action="#{shoppingCartController.incrementTotalItem}"/>
-		</h:form>
+
+				<h:commandButton type="submit" value="Add To Cart"
+					action="#{shoppingCartController.incrementTotalItem}">
+					<f:ajax render=":hasil1" />
+				</h:commandButton>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </body>
