@@ -1,6 +1,13 @@
 package id.co.skyforce.shop.service;
 
-import id.co.skyforce.shop.model.ShoppingCart;
+import id.co.skyforce.shop.controller.ShoppingCartController;
+import id.co.skyforce.shop.model.Product;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 
 /**
  * 
@@ -10,12 +17,23 @@ import id.co.skyforce.shop.model.ShoppingCart;
 
 public class ShoppingCartService {
 	
-	public Integer incrementQuantity(ShoppingCart cart) {
-		ShoppingCart keranjang = new ShoppingCart();
-		keranjang = cart;
-		keranjang.setCountItem(keranjang.getCountItem()+1);
-		System.out.println("keranjang.getCountItem() = " + keranjang.getCountItem());
-		return keranjang.getCountItem();
+	public BigDecimal totalAmountService(Map<Product, Long> productsAndQuantity) {
+		
+//		ShoppingCartController cartController = new ShoppingCartController();
+		
+//		Map<Product, BigDecimal> productsAndPrice = new HashMap<>();
+		
+		BigDecimal totalAmount = null;
+		
+		for (Entry<Product, Long> e : productsAndQuantity.entrySet()) {
+//			productsAndPrice.put(e.getKey(), 
+//					e.getKey().getPrice().multiply(BigDecimal.valueOf(e.getValue())));
+			totalAmount = totalAmount.add(e.getKey().getPrice().multiply(BigDecimal.valueOf(e.getValue()))); 
+		}
+		
+//		cartController.setProductsAndPrice(productsAndPrice);
+		
+		return totalAmount;
 	}
 	
 }

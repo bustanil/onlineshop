@@ -1,10 +1,19 @@
 package id.co.skyforce.shop.controller;
 
-import id.co.skyforce.shop.model.ShoppingCart;
+import id.co.skyforce.shop.model.Customer;
+import id.co.skyforce.shop.model.Product;
+import id.co.skyforce.shop.service.ProductDetailService;
 import id.co.skyforce.shop.service.ShoppingCartService;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  * 
@@ -15,20 +24,100 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class ShoppingCartController {
-
-	private ShoppingCart cart = new ShoppingCart();
 	
-	public String countItem() {
+	private Integer totalItem = 0;
+	private Long productId;
+	private BigDecimal totalAmount;
+	
+	// pass dari loginController
+	private Customer customer;
+	
+	private Product product;
+	private Map<Product, Long> productsAndQuantity;
+	private Map<Product, BigDecimal> productsAndPrice;
+	
+	public void incrementTotalItem() {
+		
+		totalItem += 1;
+		
+		productId = Long.parseLong(FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap().get("id"));
+		
+		ProductDetailService detailService = new ProductDetailService();
+		
+		// check apakah product sudah ada di map
+		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
+		
+		// add product to to map product
+		productsAndQuantity.put(product, incrementQuantity + 1);
+		
+		// tidak perlu di-direct ke page lain, karena sudah menggunakan AJAX
+		// sehingga perubahan langsung diterapkan
+		
+	}
+	
+	public String calculateTotalAmount() {
+		
 		ShoppingCartService cartService = new ShoppingCartService();
-		return String.valueOf(cartService.incrementQuantity(cart));
+		totalAmount = cartService.totalAmountService(productsAndQuantity);
+		
+		return "checkout";
 	}
 	
-	public ShoppingCart getCart() {
-		return cart;
+	public Integer getTotalItem() {
+		return totalItem;
 	}
 	
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
+	public void setTotalItem(Integer totalItem) {
+		this.totalItem = totalItem;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+	
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Map<Product, Long> getProductsAndQuantity() {
+		return productsAndQuantity;
+	}
+
+	public void setProductsAndQuantity(Map<Product, Long> productsAndQuantity) {
+		this.productsAndQuantity = productsAndQuantity;
+	}
+
+	public Map<Product, BigDecimal> getProductsAndPrice() {
+		return productsAndPrice;
+	}
+
+	public void setProductsAndPrice(Map<Product, BigDecimal> productsAndPrice) {
+		this.productsAndPrice = productsAndPrice;
+	}
+
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	
 }

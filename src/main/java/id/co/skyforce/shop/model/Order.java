@@ -38,15 +38,6 @@ public class Order {
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id") //foreign key
 	private Set<OrderDetail> orderDetails = new HashSet<>(); //
-	
-	@Column(name = "street", length = 50, nullable = false)
-	private String street;
-	
-	@Column(name = "city", length = 50, nullable = false)
-	private String city;
-	
-	@Column(name = "postal_code", length = 5, nullable = false)
-	private String postalCode;
 
 	public Long getId() {
 		return id;
@@ -78,30 +69,6 @@ public class Order {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
 	}
 
 	public Set<OrderDetail> getOrderDetails() {
