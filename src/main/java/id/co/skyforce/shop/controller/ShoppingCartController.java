@@ -25,7 +25,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class ShoppingCartController {
 	
-	private Integer totalItem = 0;
+//	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
 	
@@ -36,23 +36,36 @@ public class ShoppingCartController {
 	private Map<Product, Long> productsAndQuantity;
 	private Map<Product, BigDecimal> productsAndPrice;
 	
-	public void incrementTotalItem() {
+//	public void incrementTotalItem() {
 		
-		totalItem += 1;
+//		totalItem += 1;
 		
-		productId = Long.parseLong(FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap().get("id"));
+//		productId = Long.parseLong(FacesContext.getCurrentInstance()
+//				.getExternalContext().getRequestParameterMap().get("id"));
 		
-		ProductDetailService detailService = new ProductDetailService();
+//		ProductDetailService detailService = new ProductDetailService();
+//		product = detailService.getDetailProduct(productId);
+		
+		// check apakah product sudah ada di map
+//		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
+		
+		// add product to to map product
+//		productsAndQuantity.put(product, incrementQuantity + 1);
+		
+		// tidak perlu di-direct ke page lain, karena sudah menggunakan AJAX
+		// sehingga perubahan langsung diterapkan
+		
+//		return "list?faces-redirect=true";
+		
+//	}
+	
+	public void addProduct() {
 		
 		// check apakah product sudah ada di map
 		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
 		
 		// add product to to map product
 		productsAndQuantity.put(product, incrementQuantity + 1);
-		
-		// tidak perlu di-direct ke page lain, karena sudah menggunakan AJAX
-		// sehingga perubahan langsung diterapkan
 		
 	}
 	
@@ -62,15 +75,16 @@ public class ShoppingCartController {
 		totalAmount = cartService.totalAmountService(productsAndQuantity);
 		
 		return "checkout";
+		
 	}
 	
-	public Integer getTotalItem() {
-		return totalItem;
-	}
-	
-	public void setTotalItem(Integer totalItem) {
-		this.totalItem = totalItem;
-	}
+//	public Integer getTotalItem() {
+//		return totalItem;
+//	}
+//	
+//	public void setTotalItem(Integer totalItem) {
+//		this.totalItem = totalItem;
+//	}
 
 	public Customer getCustomer() {
 		return customer;
@@ -119,5 +133,7 @@ public class ShoppingCartController {
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	
+	
 	
 }
