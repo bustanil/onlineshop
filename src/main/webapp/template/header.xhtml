@@ -31,8 +31,14 @@
 								Edit Profile
 										<f:param name="idcustomer" value="#{loginController.cust.id}" />
 								</h:link></li>
-								<li><a href=""><span class="glyphicon glyphicon-list-alt"
-										style="padding-right: 5px" ></span>Transaction History</a></li>
+								<li>
+								<h:link outcome="/user/transhistory" >
+								<span class="glyphicon glyphicon-list-alt" style="padding-right: 5px"></span>
+								Transaction History
+										<f:param name="idcustomer" value="#{loginController.cust.id}" />
+								</h:link></li>
+<!-- 								<li><a href=""><span class="glyphicon glyphicon-list-alt" -->
+<!-- 										style="padding-right: 5px" ></span>Transaction History</a></li> -->
 								<li class="divider"></li>
 								<li>
 									<h:form style="margin-left: 20px">
