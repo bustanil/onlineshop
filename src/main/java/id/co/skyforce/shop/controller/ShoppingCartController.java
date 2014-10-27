@@ -1,10 +1,15 @@
 package id.co.skyforce.shop.controller;
 
-import id.co.skyforce.shop.model.ShoppingCart;
-import id.co.skyforce.shop.service.ShoppingCartService;
+import id.co.skyforce.shop.model.Customer;
+import id.co.skyforce.shop.model.Product;
+
+import java.io.IOException;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  * 
@@ -15,20 +20,49 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class ShoppingCartController {
+	
+	private Integer totalItem = 0;
+	
+	private Customer customer;
+	
+	private List<Product> products;
+	
+	public void incrementTotalItem() {
+		
+		totalItem += 1;
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance()
+				.getExternalContext();
+		try {
+			externalContext.redirect("list.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public Integer getTotalItem() {
+		return totalItem;
+	}
 
-	private ShoppingCart cart = new ShoppingCart();
-	
-	public String countItem() {
-		ShoppingCartService cartService = new ShoppingCartService();
-		return String.valueOf(cartService.incrementQuantity(cart));
-	}
-	
-	public ShoppingCart getCart() {
-		return cart;
-	}
-	
-	public void setCart(ShoppingCart cart) {
-		this.cart = cart;
+	public void setTotalItem(Integer totalItem) {
+		this.totalItem = totalItem;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	
 }

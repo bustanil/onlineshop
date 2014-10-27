@@ -64,6 +64,9 @@ public class Customer {
 	@JoinColumn(name = "customer_id")
 	private Set<Order> orders;
 	
+	@OneToMany
+	@JoinColumn(name = "customer_id")
+	private Set<ShoppingCart> carts;
 
 	public String getFirstName() {
 		return firstName;
@@ -168,7 +171,13 @@ public class Customer {
 	public void setGender(Character gender) {
 		this.gender = gender;
 	}
-	
-	
+
+	public Set<ShoppingCart> getCarts() {
+		return carts;
+	}
+
+	public void setCarts(Set<ShoppingCart> carts) {
+		this.carts = carts;
+	}
 	
 }

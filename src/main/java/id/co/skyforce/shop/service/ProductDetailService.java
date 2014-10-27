@@ -15,19 +15,18 @@ import id.co.skyforce.shop.util.HibernateUtil;
  */
 
 public class ProductDetailService {
-	public Product getDetailProduct() {
+	
+	public Product getDetailProduct(Long productId) {
 
 		Session session = HibernateUtil.openSession();
 		Transaction trx = session.beginTransaction();
 		
-		long id = Long.parseLong(FacesContext.getCurrentInstance().getExternalContext()
-				.getRequestParameterMap().get("id"));
-		
-		Product product = (Product) session.get(Product.class,id);
+		Product product = (Product) session.get(Product.class, productId);
 
 		session.save(product);
 		trx.commit();
 
 		return product;
 	}
+	
 }
