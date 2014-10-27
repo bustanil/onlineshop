@@ -7,6 +7,7 @@
 <h:head></h:head>
 <body>
 	<ui:composition template="/template/bootstrap.xhtml">
+
 		<ui:define name="panelHeadingCat">Category</ui:define>
 		<ui:define name="contentCat">
 
@@ -25,35 +26,43 @@
 
 		</ui:define>
 
+
 		<ui:define name="panelHeading">
-			<h3>
-				<h:outputText value="#{productDetailController.product.name}" />
-			</h3>
+			<div class="row">
+				<div class="col-md-7">
+					<h3>Transaction Detail History</h3>
+				</div>
+				<div class="col-md-5" style="height: 57px;">
+					<br />
+
+				</div>
+
+			</div>
 		</ui:define>
+
+
 		<ui:define name="content">
 
-			<h:form>
+			<h:dataTable var="d"
+				value="#{transHistoryDetailController.orderDetailList}" border="1">
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputText value="#{d.order.id} " />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Produk</f:facet>
+					<h:outputText value="#{d.product.id} - #{d.product.name}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Price</f:facet>
+					<h:outputText value="#{d.price}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Qty</f:facet>
+					<h:outputText value="#{d.quantity}" />
+				</h:column>
+			</h:dataTable>
 
-				<h4>
-					<h:outputText value="Price" />
-				</h4>
-				<h:outputText value="#{productDetailController.product.price}" />
-				<br />
-				<h4>
-					<h:outputText value="Stock" />
-				</h4>
-				<h:outputText value="#{productDetailController.product.stock}" />
-				<br />
-				<h4>
-					<h:outputText value="Description" />
-				</h4>
-				<h:outputText value="#{productDetailController.product.description}" />
-				<br />
-
-				<h:commandButton type="submit" value="Add To Cart">
-					<f:ajax render=":hasil1" listener="#{productDetailController.tambahProduct}"/>
-				</h:commandButton>
-			</h:form>
 		</ui:define>
 	</ui:composition>
 </body>
