@@ -33,7 +33,6 @@ public class Supplier {
             @JoinColumn(name = "category_id", referencedColumnName = "id") 
         }
     )
-    private Category category;
     private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
@@ -66,11 +65,9 @@ public class Supplier {
                 + categories + "]";
     }
 
-    public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    public Product getCategory() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+    
 }
