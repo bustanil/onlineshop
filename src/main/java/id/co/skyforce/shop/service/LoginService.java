@@ -40,7 +40,7 @@ public class LoginService {
 			return true;
 		}
 		else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
+			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
 			return false;
 		}
 	}
