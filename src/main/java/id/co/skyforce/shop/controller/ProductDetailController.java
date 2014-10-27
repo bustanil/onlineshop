@@ -7,11 +7,9 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-
-import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 
 /**
  * 
@@ -20,12 +18,11 @@ import com.mysql.jdbc.AbandonedConnectionCleanupThread;
  */
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ProductDetailController implements Serializable {
 	
 	private Long productId;
 	private Product product;
-//	private Integer totalItem = 0;
 	
 	@ManagedProperty(value="#{shoppingCartController}")
 	private ShoppingCartController cartController;
@@ -38,9 +35,6 @@ public class ProductDetailController implements Serializable {
 		ProductDetailService detailService = new ProductDetailService();
 		product = detailService.getDetailProduct(productId);
 		
-//		cartController.setProductId(productId);
-//		cartController.addProduct(product);
-		
 	}
 	
 	public void tambahProduct(AjaxBehaviorEvent a) {
@@ -49,17 +43,6 @@ public class ProductDetailController implements Serializable {
 		cartController.incrementTotalItem();
 	
 	}
-	
-//	public void incrementTotalItem() {
-//		
-//		totalItem += 1;
-//		
-//		ProductDetailService detailService = new ProductDetailService();
-//		product = detailService.getDetailProduct(productId);
-//		
-//		cartController.addProduct(product);
-//		
-//	}
 
 	public Product getProduct() {
 		return product;
@@ -76,14 +59,6 @@ public class ProductDetailController implements Serializable {
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
-
-//	public Integer getTotalItem() {
-//		return totalItem;
-//	}
-//
-//	public void setTotalItem(Integer totalItem) {
-//		this.totalItem = totalItem;
-//	}
 
 	public ShoppingCartController getCartController() {
 		return cartController;
