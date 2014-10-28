@@ -41,9 +41,6 @@ public class SupplierListService {
 		
 		supp = session.createQuery("from Supplier").list();
 		
-		for (Supplier sup : supp){
-			Hibernate.initialize(sup.getCategory().getId());
-		}
 		trx.commit();
 		session.close();
 		return supp;
