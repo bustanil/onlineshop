@@ -58,20 +58,11 @@
 								</h:link>
 							</div>
 
-							<div class="col-md-1">
-								<h:form>
-									<h:commandLink action="#{supplierController.DeleteSup}"
-										value="Delete" outcome="listsupplier">
-										<f:param name="idDelete" value="#{s.id}" />
-									</h:commandLink>
-								</h:form>
-							</div>
-
 						</div>
 					</li>
 				</ui:repeat>
 			</ul>
-			<h:link value="Add new product" outcome="formproduct" />
+			<h:link value="Add new product" outcome="formsupplier" />
 		</ui:define>
 	</ui:composition>
 </body>

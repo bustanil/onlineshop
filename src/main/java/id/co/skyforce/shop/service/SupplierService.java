@@ -66,7 +66,6 @@ public class SupplierService {
 		Supplier supplier = (Supplier) session.get(Supplier.class, supplierId);
 		
 		//Mendapatkan nilai Id dengan hubungan yang bertipe LAZY
-		supplier.getCategory().getId();
 		
 		session.close();
 		
