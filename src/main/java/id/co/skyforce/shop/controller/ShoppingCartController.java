@@ -6,7 +6,9 @@ import id.co.skyforce.shop.service.ShoppingCartService;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -27,6 +29,7 @@ public class ShoppingCartController implements Serializable {
 	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
+	private List<BigDecimal> subtotal = new ArrayList<>();
 	
 	// pass dari loginController
 	private Customer customer;
@@ -57,6 +60,24 @@ public class ShoppingCartController implements Serializable {
 		
 		ShoppingCartService cartService = new ShoppingCartService();
 		totalAmount = cartService.totalAmountService(productsAndQuantity);
+		
+	}
+	
+	public void simpanSubtotal(BigDecimal subtotal) {
+		
+		this.subtotal.add(subtotal);
+		
+		for (BigDecimal tempSubtotal : this.subtotal) {
+			
+			System.out.println(tempSubtotal);
+			
+		}
+		
+ 	}
+	
+	public String checkout() {
+		
+		return "login";
 		
 	}
 	
@@ -107,7 +128,13 @@ public class ShoppingCartController implements Serializable {
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	
-	
+
+	public List<BigDecimal> getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(List<BigDecimal> subtotal) {
+		this.subtotal = subtotal;
+	}
 	
 }
