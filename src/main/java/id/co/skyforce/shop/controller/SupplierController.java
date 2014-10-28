@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-import id.co.skyforce.shop.model.Category;
+import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.model.Supplier;
+import id.co.skyforce.shop.service.ProductListService;
+import id.co.skyforce.shop.service.ProductService;
 import id.co.skyforce.shop.service.SupplierListService;
 import id.co.skyforce.shop.service.SupplierService;
 
@@ -22,16 +24,17 @@ import javax.faces.context.FacesContext;
 public class SupplierController {
 	
 	private String name;
-	private Long categoryId;
 	private Long supplierId;
 	
 	private List<Supplier> suppliers;
-	private List<Category> categories;
 	private String keyword;
 
 	public SupplierController(){
+		
 		String idSupplier = FacesContext.getCurrentInstance()
-				.getExternalContext().getRequestParameterMap().get("id");
+				.getExternalContext().getRequestParameterMap()
+				.get("supplier_id");
+		
 		SupplierService suppService = new SupplierService();
 		
 		if(idSupplier != null){
@@ -40,7 +43,6 @@ public class SupplierController {
 			Supplier supplier = suppService.getSupplier(supplierId);
 			
 			name = supplier.getName();
-			categoryId = supplier.getCategory().getId();
 			
 		}
 	}
@@ -60,7 +62,6 @@ public class SupplierController {
 
 		SupplierService suppService = new SupplierService();
 		
-		Category category = suppService.getCategory(this.categoryId);
 		Supplier supplier = new Supplier();
 		supplier.setName(name);
 		
@@ -108,14 +109,6 @@ public class SupplierController {
 		this.name = name;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
-
 	public Long getSupplierId() {
 		return supplierId;
 	}
@@ -130,14 +123,6 @@ public class SupplierController {
 
 	public void setSuppliers(List<Supplier> suppliers) {
 		this.suppliers = suppliers;
-	}
-
-	public List<Category> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
 	}
 
 	public String getKeyword() {
