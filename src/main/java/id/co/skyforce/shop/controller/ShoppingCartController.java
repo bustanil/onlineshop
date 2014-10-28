@@ -37,7 +37,6 @@ public class ShoppingCartController implements Serializable {
 	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
-	private Double subtotal;
 	
 	// pass dari loginController
 	private Customer customer;
@@ -114,8 +113,7 @@ public class ShoppingCartController implements Serializable {
 		// clear object's contents
 		totalItem = 0;
 		totalAmount = new BigDecimal(0);
-		subtotal = 0D;
-		productsAndQuantity = null;
+		productsAndQuantity = new HashMap<>();
 		
 		return "successtransaction";
 		
@@ -175,14 +173,6 @@ public class ShoppingCartController implements Serializable {
 
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
-	}
-
-	public Double getSubtotal() {
-		return subtotal;
-	}
-
-	public void setSubtotal(Double subtotal) {
-		this.subtotal = subtotal;
 	}
 	
 }
