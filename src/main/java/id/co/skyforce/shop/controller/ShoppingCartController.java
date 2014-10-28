@@ -119,6 +119,10 @@ public class ShoppingCartController implements Serializable {
 		
 	}
 	
+	public String cancel() {
+		return "index";
+	}
+	
 	public Integer getTotalItem() {
 		return totalItem;
 	}
