@@ -23,32 +23,32 @@ import javax.faces.context.FacesContext;
 public class LoginController implements Serializable {
 
 	public static String AUTH_KEY = "app.user.name";
-	
+
 	private String email;
 	private String password;
 	String url;
 	Customer cust = new Customer();
-	
+
 	public LoginController(){
 		String IdCustomer=  FacesContext.getCurrentInstance().
 				getExternalContext().getRequestParameterMap().get("idcustomer");
 		if (IdCustomer!=null){
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		
-		try {
-			
-			externalContext.redirect("/product/list.xhtml");
-		} catch (IOException e) {
-			e.printStackTrace();
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+			try {
+
+				externalContext.redirect("/product/list.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-	}
 	}
 
 	public String login(){
 		LoginService ls = new LoginService();
 		boolean result = ls.login(email, password);
 		if (result){
-			 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(AUTH_KEY, email);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(AUTH_KEY, email);
 			cust = new Customer();
 			cust = ls.getCustomer();
 			
