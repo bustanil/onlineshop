@@ -1,12 +1,16 @@
 package id.co.skyforce.shop.controller;
 
 import id.co.skyforce.shop.model.Customer;
+import id.co.skyforce.shop.model.Order;
+import id.co.skyforce.shop.model.OrderDetail;
 import id.co.skyforce.shop.model.Product;
 import id.co.skyforce.shop.service.ShoppingCartService;
+import id.co.skyforce.shop.util.HibernateUtil;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +18,11 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * 
@@ -32,7 +40,10 @@ public class ShoppingCartController implements Serializable {
 	private List<BigDecimal> subtotal = new ArrayList<>();
 	
 	// pass dari loginController
-	private Customer customer = new Customer();
+	private Customer customer;
+	
+	@ManagedProperty(value="#{loginController}")
+    private LoginController loginController;
 	
 	private Product product;
 	private Map<Product, Long> productsAndQuantity = new HashMap<>();
@@ -77,11 +88,43 @@ public class ShoppingCartController implements Serializable {
 	
 	public String checkout() {
 		
-		if(!customer.equals(null)) {
-			return "checkout";
+		customer = loginController.cust;
+		if (customer.getEmail() == null) {
+			return "/user/login.xhtml";
+		}
+		return "checkout";
+		
+	}
+	
+	public String prosesBeli() {
+		
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		Order order = new Order();
+		
+		order.setDate(new Date());
+		order.setCustomer(customer);
+		order.setTotalAmount(totalAmount);
+		
+		for(Entry<Product, Long> e : productsAndQuantity.entrySet()) {
+			
+			OrderDetail orderDetail = new OrderDetail();
+			orderDetail.setProduct(e.getKey());
+			orderDetail.setQuantity(e.getValue().intValue());
+			orderDetail.setPrice(e.getKey().getPrice());
+			order.getOrderDetails().add(orderDetail);
+			session.save(orderDetail);
+			
 		}
 		
-		return "/user/login";
+		session.save(order);
+
+		transaction.commit();
+		session.close();
+		
+		
+		return "successtransaction";
 		
 	}
 	
@@ -139,6 +182,14 @@ public class ShoppingCartController implements Serializable {
 
 	public void setSubtotal(List<BigDecimal> subtotal) {
 		this.subtotal = subtotal;
+	}
+
+	public LoginController getLoginController() {
+		return loginController;
+	}
+
+	public void setLoginController(LoginController loginController) {
+		this.loginController = loginController;
 	}
 	
 }
