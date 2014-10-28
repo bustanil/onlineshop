@@ -51,7 +51,7 @@ public class SupplierController {
 		this.suppliers = suppService.searchByNameService(this.keyword);
 		
 		SupplierListController suppListController = new SupplierListController();
-		suppListController.setSupplier(null);
+		suppListController.setSupp(null);
 		
 		return "list";
 	}
@@ -89,7 +89,7 @@ public class SupplierController {
 		List<Supplier> suppliers = suppListService.getAllSupplier();
 		
 		SupplierListController suppListController = new SupplierListController();
-		suppListController.setSupplier(suppliers);
+		suppListController.setSupp(suppliers);
 		
 		ExternalContext externalContext = FacesContext.getCurrentInstance()
 				.getExternalContext();
@@ -100,89 +100,54 @@ public class SupplierController {
 		}
 		}
 
-	/**
-	 * @return the supplierId
-	 */
-	public Long getSupplierId() {
-		return supplierId;
-	}
-
-	/**
-	 * @param supplierId the supplierId to set
-	 */
-	public void setSupplierId(Long supplierId) {
-		this.supplierId = supplierId;
-	}
-
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/**
-	 * @return the categoryId
-	 */
 	public Long getCategoryId() {
 		return categoryId;
 	}
 
-	/**
-	 * @param categoryId the categoryId to set
-	 */
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	/**
-	 * @return the suppliers
-	 */
+	public Long getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(Long supplierId) {
+		this.supplierId = supplierId;
+	}
+
 	public List<Supplier> getSuppliers() {
 		return suppliers;
 	}
 
-	/**
-	 * @param suppliers the suppliers to set
-	 */
 	public void setSuppliers(List<Supplier> suppliers) {
 		this.suppliers = suppliers;
 	}
 
-	/**
-	 * @return the categories
-	 */
 	public List<Category> getCategories() {
 		return categories;
 	}
 
-	/**
-	 * @param categories the categories to set
-	 */
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
 
-	/**
-	 * @return the keyword
-	 */
 	public String getKeyword() {
 		return keyword;
 	}
 
-	/**
-	 * @param keyword the keyword to set
-	 */
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
 	
 
 	

@@ -6,7 +6,9 @@ import id.co.skyforce.shop.service.ShoppingCartService;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -27,16 +29,17 @@ public class ShoppingCartController implements Serializable {
 	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
+	private List<BigDecimal> subtotal = new ArrayList<>();
 	
 	// pass dari loginController
-	private Customer customer;
+	private Customer customer = new Customer();
 	
 	private Product product;
 	private Map<Product, Long> productsAndQuantity = new HashMap<>();
-	private Map<Product, BigDecimal> productsAndPrice  = new HashMap<>();
 	
 	public void incrementTotalItem() {
 		totalItem += 1;
+		calculateTotalAmount();
 	}
 	
 	public Set<Entry<Product, Long>> getItems(){
@@ -51,21 +54,34 @@ public class ShoppingCartController implements Serializable {
 		// add product to map product
 		productsAndQuantity.put(product, incrementQuantity + 1);
 		
-		for(Entry<Product, Long> e : productsAndQuantity.entrySet()) {
-			System.out.println("Prouduct = " + e.getKey().getName() + 
-					" - Kuantitas = " + e.getValue());
-		}
-		
 	}
 	
-	public String calculateTotalAmount() {
+	public void calculateTotalAmount() {
 		
 		ShoppingCartService cartService = new ShoppingCartService();
 		totalAmount = cartService.totalAmountService(productsAndQuantity);
 		
-		System.out.println(totalAmount);
+	}
+	
+	public void simpanSubtotal(BigDecimal subtotal) {
 		
-		return "checkout";
+		this.subtotal.add(subtotal);
+		
+		for (BigDecimal tempSubtotal : this.subtotal) {
+			
+			System.out.println(tempSubtotal);
+			
+		}
+		
+ 	}
+	
+	public String checkout() {
+		
+		if(!customer.equals(null)) {
+			return "checkout";
+		}
+		
+		return "/user/login";
 		
 	}
 	
@@ -109,14 +125,6 @@ public class ShoppingCartController implements Serializable {
 		this.productsAndQuantity = productsAndQuantity;
 	}
 
-	public Map<Product, BigDecimal> getProductsAndPrice() {
-		return productsAndPrice;
-	}
-
-	public void setProductsAndPrice(Map<Product, BigDecimal> productsAndPrice) {
-		this.productsAndPrice = productsAndPrice;
-	}
-
 	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}
@@ -124,7 +132,13 @@ public class ShoppingCartController implements Serializable {
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	
-	
+
+	public List<BigDecimal> getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(List<BigDecimal> subtotal) {
+		this.subtotal = subtotal;
+	}
 	
 }
