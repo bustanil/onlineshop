@@ -32,7 +32,7 @@ public class ShoppingCartController implements Serializable {
 	private List<BigDecimal> subtotal = new ArrayList<>();
 	
 	// pass dari loginController
-	private Customer customer;
+	private Customer customer = new Customer();
 	
 	private Product product;
 	private Map<Product, Long> productsAndQuantity = new HashMap<>();
@@ -77,7 +77,11 @@ public class ShoppingCartController implements Serializable {
 	
 	public String checkout() {
 		
-		return "login";
+		if(!customer.equals(null)) {
+			return "checkout";
+		}
+		
+		return "/user/login";
 		
 	}
 	
