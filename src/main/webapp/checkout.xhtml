@@ -59,8 +59,7 @@
 							<div class="row">
 
 								<div class="col-md-3">
-									<h:link value="#{p.key.name}" outcome="/product/detail.xhtml">
-									</h:link>
+									<h:outputText value="#{p.key.name}" outcome="/product/detail.xhtml"/>
 								</div>
 								<div class="col-md-3">
 									<h:outputText value="#{p.key.price} " />
@@ -79,7 +78,7 @@
 								<h4>Total</h4>
 							</div>
 							<div class="col-md-2">
-								<h4>Temporary</h4>
+								<h4><h:outputText value="#{shoppingCartController.totalAmount}" /></h4>
 							</div>
 						</div>
 						</li>
@@ -89,7 +88,7 @@
 			<ul class="list-group">
 			<h:form>
 			<li class="list-group-item" style="background-color: #f5f5f5"><h4>Shipping Address</h4></li>
-			<li class="list-group-item">Barang anda akan dikirim dengan merpati balap secepat mungkin setelah anda melakukan pembayaran
+			<li class="list-group-item">asdfgh
 					</li>
 			</h:form>
 			</ul>
