@@ -98,16 +98,9 @@
 			<h:form>
 			<li class="list-group-item" style="background-color: #f5f5f5"><h4>Payment Method</h4></li>
 			<li class="list-group-item">
-			<h:selectOneMenu value="#{productController.categoryId}"
+			<h:selectOneMenu value="#{paymentController.paymentId}"
 							class="form-control">
-							<f:selectItem itemValue="1" itemLabel="Sepatu" />
-							<f:selectItem itemValue="2" itemLabel="Buku Pendidikan" />
-							<f:selectItem itemValue="6" itemLabel="Elektronik" />
-							<f:selectItem itemValue="23" itemLabel="Buku Cerita" />
-							<f:selectItem itemValue="25" itemLabel="Rak Buku" />
-							<f:selectItem itemValue="26" itemLabel="SmartPhone" />
-							<f:selectItem itemValue="27" itemLabel="Notebook" />
-							<f:selectItem itemValue="28" itemLabel="SmartWatch" />
+							<f:selectItems var="p" value="#{paymentController.payMethod}" itemValue="#{p.id}" itemLabel="#{p.name}"/>
 						</h:selectOneMenu>
 						<br/>
 						<div class="row">
