@@ -3,7 +3,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
 <h:head></h:head>
@@ -59,7 +59,8 @@
 							<div class="row">
 
 								<div class="col-md-3">
-									<h:outputText value="#{p.key.name}" outcome="/product/detail.xhtml"/>
+									<h:outputText value="#{p.key.name}"
+										outcome="/product/detail.xhtml" />
 								</div>
 								<div class="col-md-3">
 									<h:outputText value="#{p.key.price} " />
@@ -68,7 +69,7 @@
 									<h:outputText value="#{p.value} " />
 								</div>
 								<div class="col-md-2" align="right">
-								<h:outputText value="#{p.key.price*p.value} " />
+									<h:outputText value="#{p.key.price*p.value} " />
 								</div>
 
 							</div>
@@ -80,40 +81,42 @@
 								<h4>Total</h4>
 							</div>
 							<div class="col-md-2" align="right">
-								<h4><h:outputText value="#{shoppingCartController.totalAmount}" /></h4>
+								<h4>
+									<h:outputText value="#{shoppingCartController.totalAmount}" />
+								</h4>
 							</div>
-						</div>
-						</li>
+						</div></li>
 				</h:form>
 			</ul>
-			
+
 			<ul class="list-group">
-			<h:form>
-			<li class="list-group-item" style="background-color: #f5f5f5"><h4>Shipping Address</h4></li>
-			<li class="list-group-item">asdfgh
-					</li>
-			</h:form>
+				<h:form>
+					<li class="list-group-item" style="background-color: #f5f5f5"><h4>Shipping
+							Address</h4></li>
+					<li class="list-group-item">asdfgh</li>
+				</h:form>
 			</ul>
-			
+
 			<ul class="list-group">
-			<h:form>
-			<li class="list-group-item" style="background-color: #f5f5f5"><h4>Payment Method</h4></li>
-			<li class="list-group-item">
-			<h:selectOneMenu value="#{paymentController.paymentId}"
-							class="form-control">
-							<f:selectItems var="p" value="#{paymentController.payMethod}" itemValue="#{p.id}" itemLabel="#{p.name}"/>
-						</h:selectOneMenu>
-						<br/>
+				<h:form>
+					<li class="list-group-item" style="background-color: #f5f5f5"><h4>Payment
+							Method</h4></li>
+					<li class="list-group-item"><h:selectOneMenu
+							value="#{paymentController.paymentId}" class="form-control">
+							<f:selectItems var="p" value="#{paymentController.payMethod}"
+								itemValue="#{p.id}" itemLabel="#{p.name}" />
+						</h:selectOneMenu> <br />
 						<div class="row">
 							<div class="col-md-6">
-								<h:commandButton value="Selesai" class="form-control" action="#{shoppingCartController.prosesBeli}"/>
+								<h:commandButton value="Selesai" class="form-control"
+									action="#{shoppingCartController.prosesBeli}" />
 							</div>
 							<div class="col-md-6">
-								<h:commandButton value="Gak Jadi" class="form-control" />
+								<h:commandButton value="Gak Jadi" class="form-control"
+									action="#{shoppingCartController.cancel}" />
 							</div>
-						</div>
-					</li>
-			</h:form>
+						</div></li>
+				</h:form>
 			</ul>
 
 		</ui:define>
