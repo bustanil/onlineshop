@@ -5,9 +5,12 @@ import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.model.CustomerStatus;
 import id.co.skyforce.shop.service.RegisterService;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  * 
@@ -17,7 +20,6 @@ import javax.faces.bean.ManagedBean;
 
 @ManagedBean
 public class RegisterController {
-
 	private String email;
 	private String password;
 	private String firstName;
@@ -27,18 +29,15 @@ public class RegisterController {
 	private String homePhone;
 	private String salutation;
 	private Character gender;
-
 	private String street;
 	private String city;
 	private String postalCode;
-	
 	private Long customerId;
 	private Long addressId;
-	
+
 	private Customer customer = new Customer();
-	
+
 	public void simpanCustomer(){
-		
 		customer.setFirstName(firstName);
 		customer.setLastName(lastName);
 		customer.setBirthDate(birthDate);
@@ -49,23 +48,27 @@ public class RegisterController {
 		customer.setSalutation(salutation);
 		customer.setGender(gender);
 		customer.setStatus(CustomerStatus.ACTIVE);
-		
+
 		Address address = new Address();
 		address.setStreet(street);
 		address.setCity(city);
 		address.setPostalCode(postalCode);
-		
+
 		customer.setAddress(address);
-		
+
 		newCustomer(customer);
-		
+
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		try {
+			externalContext.redirect("login.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void newCustomer(Customer customer) {
-		
 		RegisterService regService = new RegisterService();
 		regService.register(customer);
-		
 	}
 
 	public String getEmail() {
