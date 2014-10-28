@@ -16,7 +16,6 @@ import javax.faces.context.FacesContext;
  */
 
 @ManagedBean
-@SessionScoped
 public class ProductListController {
 
 	private List <Product> prd;

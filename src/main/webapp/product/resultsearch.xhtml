@@ -49,6 +49,7 @@
 
 
 		<ui:define name="content">
+		<h:outputText id="hasil2" value="#{shoppingCartController.totalItem}"/>
 		<h:panelGroup id="hasil">
 
 		
@@ -77,34 +78,6 @@
 					</li>
 				</ui:repeat>
         </ul>
-</h:panelGroup>
-<h:panelGroup >
-			<ul class="list-group" >
-				<ui:repeat var="p" value="#{productListController.prd}">
-
-					<li class="list-group-item">
-						<div class="row">
-							<div class="col-md-2">No image here</div>
-							<div class="col-md-2">
-								<div class="row">
-									<h:link value="#{p.name}" outcome="/product/detail.xhtml" >
-										<f:param name="id" value="#{p.id}" />
-									</h:link>
-								</div>
-								<div class="row">
-									Price:
-									<h:outputText value="#{p.price} " />
-								</div>
-							</div>
-
-
-						</div>
-				
-
-					</li>
-				</ui:repeat>
-			</ul>
-
 </h:panelGroup>
 
 		</ui:define>

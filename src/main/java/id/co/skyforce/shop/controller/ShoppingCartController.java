@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -31,12 +33,14 @@ public class ShoppingCartController implements Serializable {
 	
 	private Product product;
 	private Map<Product, Long> productsAndQuantity = new HashMap<>();
-	private Map<Product, BigDecimal> productsAndPrice  = new HashMap<>();
 	
 	public void incrementTotalItem() {
-		
 		totalItem += 1;
-		
+		calculateTotalAmount();
+	}
+	
+	public Set<Entry<Product, Long>> getItems(){
+		return productsAndQuantity.entrySet();
 	}
 	
 	public void addProduct(Product product) {
@@ -44,17 +48,15 @@ public class ShoppingCartController implements Serializable {
 		// check apakah product sudah ada di map
 		long incrementQuantity = productsAndQuantity.containsKey(product) ? productsAndQuantity.get(product) : 0;
 		
-		// add product to to map product
+		// add product to map product
 		productsAndQuantity.put(product, incrementQuantity + 1);
 		
 	}
 	
-	public String calculateTotalAmount() {
+	public void calculateTotalAmount() {
 		
 		ShoppingCartService cartService = new ShoppingCartService();
 		totalAmount = cartService.totalAmountService(productsAndQuantity);
-		
-		return "checkout";
 		
 	}
 	
@@ -96,14 +98,6 @@ public class ShoppingCartController implements Serializable {
 
 	public void setProductsAndQuantity(Map<Product, Long> productsAndQuantity) {
 		this.productsAndQuantity = productsAndQuantity;
-	}
-
-	public Map<Product, BigDecimal> getProductsAndPrice() {
-		return productsAndPrice;
-	}
-
-	public void setProductsAndPrice(Map<Product, BigDecimal> productsAndPrice) {
-		this.productsAndPrice = productsAndPrice;
 	}
 
 	public BigDecimal getTotalAmount() {
