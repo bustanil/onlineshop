@@ -29,7 +29,7 @@ public class ShoppingCartService {
 			
 			totalAmount = totalAmount.add(e.getKey().getPrice().multiply(BigDecimal.valueOf(e.getValue()))); 
 			
-			cartController.simpanSubtotal(e.getKey().getPrice().multiply(BigDecimal.valueOf(e.getValue())));
+			cartController.setSubtotal(e.getKey().getPrice().multiply(BigDecimal.valueOf(e.getValue())).doubleValue());
 			
 		}
 		

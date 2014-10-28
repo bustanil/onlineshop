@@ -37,7 +37,7 @@ public class ShoppingCartController implements Serializable {
 	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
-	private List<BigDecimal> subtotal = new ArrayList<>();
+	private Double subtotal;
 	
 	// pass dari loginController
 	private Customer customer;
@@ -73,18 +73,6 @@ public class ShoppingCartController implements Serializable {
 		totalAmount = cartService.totalAmountService(productsAndQuantity);
 		
 	}
-	
-	public void simpanSubtotal(BigDecimal subtotal) {
-		
-		this.subtotal.add(subtotal);
-		
-		for (BigDecimal tempSubtotal : this.subtotal) {
-			
-			System.out.println(tempSubtotal);
-			
-		}
-		
- 	}
 	
 	public String checkout() {
 		
@@ -123,6 +111,11 @@ public class ShoppingCartController implements Serializable {
 		transaction.commit();
 		session.close();
 		
+		// clear object's contents
+		totalItem = 0;
+		totalAmount = new BigDecimal(0);
+		subtotal = 0D;
+		productsAndQuantity = null;
 		
 		return "successtransaction";
 		
@@ -176,20 +169,20 @@ public class ShoppingCartController implements Serializable {
 		this.totalAmount = totalAmount;
 	}
 
-	public List<BigDecimal> getSubtotal() {
-		return subtotal;
-	}
-
-	public void setSubtotal(List<BigDecimal> subtotal) {
-		this.subtotal = subtotal;
-	}
-
 	public LoginController getLoginController() {
 		return loginController;
 	}
 
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
+	}
+
+	public Double getSubtotal() {
+		return subtotal;
+	}
+
+	public void setSubtotal(Double subtotal) {
+		this.subtotal = subtotal;
 	}
 	
 }
