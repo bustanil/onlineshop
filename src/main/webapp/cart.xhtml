@@ -81,8 +81,8 @@
 						<div class="col-md-3">
 							<h:outputText value="#{p.key.price} " />
 						</div>
-						<div class="col-md-2"><h:outputText value="#{p.value} " /></div>
-						<div class="col-md-2">Sub Total</div>
+						<div class="col-md-2"><h:outputText value="#{p.value}" /></div>
+						<div class="col-md-2"><h:outputText value="#{shoppingCartController.subtotal}" /></div>
 
 					</div>
 					</c:forEach>
@@ -94,7 +94,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-3">
-						<h:commandButton value="Checkout" class="form-control"/>
+						<h:commandButton value="Checkout" class="form-control" action="#{shoppingCartController.checkout}"/>
 					</div>
 
 				</div>

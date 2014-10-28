@@ -1,5 +1,8 @@
 package id.co.skyforce.shop.controller;
 
+import id.co.skyforce.shop.model.Customer;
+import id.co.skyforce.shop.service.LoginService;
+
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -8,10 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
-import id.co.skyforce.shop.model.Customer;
-import id.co.skyforce.shop.service.LoginService;
 
 /**
  * 
@@ -52,6 +51,10 @@ public class LoginController implements Serializable {
 			 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(AUTH_KEY, email);
 			cust = new Customer();
 			cust = ls.getCustomer();
+			
+			ShoppingCartController cartController = new ShoppingCartController();
+			cartController.setCustomer(cust);
+			
 			return "/product/list";
 		}
 		else{
