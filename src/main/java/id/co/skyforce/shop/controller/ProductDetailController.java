@@ -43,6 +43,12 @@ public class ProductDetailController implements Serializable {
 		cartController.incrementTotalItem();
 	
 	}
+	
+	public void hapusProduct(AjaxBehaviorEvent a) {
+		
+		cartController.delete();
+		cartController.incrementTotalItem();
+	}
 
 	public Product getProduct() {
 		return product;

@@ -3,6 +3,8 @@ package id.co.skyforce.shop.service;
 import id.co.skyforce.shop.controller.LoginController;
 import id.co.skyforce.shop.controller.ShoppingCartController;
 import id.co.skyforce.shop.model.Product;
+import id.co.skyforce.shop.model.ShoppingCart;
+import id.co.skyforce.shop.util.HibernateUtil;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -10,6 +12,9 @@ import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 
 /**
@@ -31,6 +36,22 @@ public class ShoppingCartService {
 		}
 		
 		return totalAmount;
+	}
+	
+	public ShoppingCart deleteService(Long cartId) {
+		
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		ShoppingCart sc = (ShoppingCart) session.get(ShoppingCart.class, cartId);
+		
+		session.delete(sc);
+		
+		transaction.commit();
+		session.close();
+		
+		return sc;
+
 	}
 	
 }

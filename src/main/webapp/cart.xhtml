@@ -50,6 +50,9 @@
 								<h4>Quantity</h4>
 							</div>
 							<div class="col-md-2">
+								<h4></h4>
+							</div>
+							<div class="col-md-2">
 								<h4>Sub Total</h4>
 							</div>
 						</div>
@@ -68,9 +71,25 @@
 								<div class="col-md-2">
 									<h:outputText value="#{p.value}" />
 								</div>
+								<div class="col-md-1">
+								<h:form>
+									<h:link value="Update" outcome="/product/list.xhtml">
+									</h:link>
+								</h:form>
+							</div>
+
 								<div class="col-md-2" align="right">
 									<h:outputText value="#{p.key.price*p.value}" />
 								</div>
+								
+								<div class="col-md-1">
+								<h:form>
+									<h:commandLink action="#{shoppingCartController.delete}"
+										value="Delete" outcome="cart">
+										<f:param name="idDelete" value="#{p.key.price==0}" />
+									</h:commandLink>
+								</h:form>
+							</div>
 
 							</div>
 						</c:forEach>

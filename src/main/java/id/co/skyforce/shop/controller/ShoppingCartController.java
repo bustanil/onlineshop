@@ -1,12 +1,19 @@
 package id.co.skyforce.shop.controller;
 
+import id.co.skyforce.shop.model.Category;
 import id.co.skyforce.shop.model.Customer;
 import id.co.skyforce.shop.model.Order;
 import id.co.skyforce.shop.model.OrderDetail;
 import id.co.skyforce.shop.model.Product;
+import id.co.skyforce.shop.model.Supplier;
+import id.co.skyforce.shop.service.PaymentService;
+import id.co.skyforce.shop.service.ProductListService;
+import id.co.skyforce.shop.service.ProductService;
+import id.co.skyforce.shop.service.ShopService;
 import id.co.skyforce.shop.service.ShoppingCartService;
 import id.co.skyforce.shop.util.HibernateUtil;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,6 +27,8 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -34,6 +43,7 @@ import org.hibernate.Transaction;
 @SessionScoped
 public class ShoppingCartController implements Serializable {
 	
+	private Long cartId;
 	private Integer totalItem = 0;
 	private Long productId;
 	private BigDecimal totalAmount;
@@ -65,7 +75,7 @@ public class ShoppingCartController implements Serializable {
 		productsAndQuantity.put(product, incrementQuantity + 1);
 		
 	}
-	
+
 	public void calculateTotalAmount() {
 		
 		ShoppingCartService cartService = new ShoppingCartService();
@@ -83,6 +93,24 @@ public class ShoppingCartController implements Serializable {
 		
 	}
 	
+	public void delete() {
+		String passCartDelete = FacesContext.getCurrentInstance()
+				.getExternalContext().getRequestParameterMap().get("idDelete");
+		this.cartId = Long.valueOf(passCartDelete);
+		
+		ShoppingCartService scs = new ShoppingCartService();
+		scs.deleteService(this.cartId);
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance()
+				.getExternalContext();
+		try {
+			externalContext.redirect("cart.html");
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		
+		
+	}
 	public String prosesBeli() {
 		
 		Session session = HibernateUtil.openSession();
